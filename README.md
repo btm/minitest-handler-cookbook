@@ -1,3 +1,8 @@
+Cookbook: minitest-handler
+Author: Bryan McLellan <btm@loftninjas.org>
+Copyright: 2012 Opscode, Inc.
+License: Apache 2.0
+
 Description
 ===========
 
