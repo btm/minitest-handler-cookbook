@@ -26,7 +26,7 @@ Usage
 =====
 
 * The node run list should begin with 'recipe[chef_handler], recipe[chef-minitest]'
-* Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
+* Each cookbook should contain tests in the 'tests/minitest/<recipe_name>' directory with a file suffix of '_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
 
