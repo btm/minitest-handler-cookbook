@@ -31,9 +31,9 @@ end
 # Search through all cookbooks in the run list for tests
 node[:recipes].each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a delimiter
-  cookbook_name = recipe.split('::').first
+  cookbook_name, recipe_name = recipe.split('::')
   remote_directory "tests-#{cookbook_name}" do
-    source "tests/minitest"
+    source "tests/minitest/#{recipe_name}"
     cookbook cookbook_name
     path "#{node[:minitest][:path]}/#{cookbook_name}"
     purge true
