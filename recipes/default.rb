@@ -1,16 +1,14 @@
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
-r = gem_package "minitest" do
+gem_package "minitest" do
   action :nothing
-end
+end.run_action(:install)
 
-r.run_action(:install)
+gem_package "minitest-chef-handler" do
+  action :nothing
+end.run_action(:install)
+
 Gem.clear_paths
-
-# Download latest copy of minitest-chef-handler
-remote_file "minitest-chef-handler" do
-  source "https://raw.github.com/calavera/minitest-chef-handler/master/lib/minitest-chef-handler.rb"
-  path "#{node["chef_handler"]["handler_path"]}/minitest-chef-handler.rb"
-end
+require "minitest-chef-handler"
 
 # Directory to store cookbook tests
 directory node[:minitest][:path] do
@@ -31,10 +29,11 @@ node[:recipes].each do |recipe|
   end
 end
 
-# Install the handler using the LWRP in the chef_handler cookbook
-chef_handler "MiniTest::Chef::Handler" do
-  source "#{node["chef_handler"]["handler_path"]}/minitest-chef-handler.rb"
-  arguments :verbose => true, :path => "#{node[:minitest][:path]}/**/*_test.rb"
-  action :enable
-end
+handler = MiniTest::Chef::Handler.new({
+  :path    => "#{node[:minitest][:path]}/**/*_test.rb",
+  :verbose => true})
+
+Chef::Log.info("Enabling minitest-chef-handler as a report handler")
+Chef::Config.send("report_handlers").delete_if {|v| v.class.to_s.include? MiniTest::Chef::Handler}
+Chef::Config.send("report_handlers") << handler
 

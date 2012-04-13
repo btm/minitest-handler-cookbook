@@ -49,3 +49,15 @@ Example
         assert File.exists?(Dir.glob("/etc/rc5.d/S*apache2").first)
       end
     end
+
+Changelog
+=====
+
+### v0.0.5 
+
+* Install the minitest-chef-handler gem instead of downloading from github directly
+* 
+
+### v0.0.4
+
+Add examples/ top level directory (may not work)
