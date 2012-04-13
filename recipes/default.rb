@@ -11,9 +11,21 @@ Gem.clear_paths
 require "minitest-chef-handler"
 
 # Directory to store cookbook tests
-directory node[:minitest][:path] do
+directory "minitest test location" do
+  path node[:minitest][:path]
   owner "root"
   group "root"
+end
+
+ruby_block "delete tests from old cookbooks" do
+  block do
+    raise "minitest-handler cookbook could not find directory '#{node[:minitest][:path]}'" unless File.directory?(node[:minitest][:path])
+    expired_cookbooks = Dir.entries(node[:minitest][:path]).delete_if { |dir| dir == '.' || dir == '..' || node[:recipes].include?(dir) }
+    expired_cookbooks.each do |cookbook|
+      Chef::Log.info("Cookbook #{cookbook} no longer in run list, remove minitest tests")
+      FileUtils.rm_rf "#{node[:minitest][:path]}/#{cookbook}"
+    end
+  end
 end
 
 # Search through all cookbooks in the run list for tests

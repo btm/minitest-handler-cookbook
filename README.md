@@ -12,11 +12,6 @@ minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler
 stable minitest-handler cookbook: http://community.opscode.com/cookbook/minitest-handler  
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook  
 
-Requirements
-============
-
-The Opscode 'chef_handler' cookbook to allow the handler to be dynamically installed without modifying the client configuration
-
 Attributes
 ==========
 
@@ -25,7 +20,7 @@ node[:minitest][:path] - Location to store and find tests
 Usage
 =====
 
-* The node run list should begin with 'recipe[chef_handler], recipe[chef-minitest]'
+* The node run list should begin with 'recipe[chef-minitest]'
 * Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
@@ -56,7 +51,7 @@ Changelog
 ### v0.0.5 
 
 * Install the minitest-chef-handler gem instead of downloading from github directly
-* 
+* Remove tests from cookbooks no longer in the run list
 
 ### v0.0.4
 
