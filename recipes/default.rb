@@ -32,6 +32,7 @@ end
 node[:recipes].each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a delimiter
   cookbook_name, recipe_name = recipe.split('::')
+  recipe_name = "default" if recipe_name.nil?
   remote_directory "tests-#{cookbook_name}" do
     source "tests/minitest/#{recipe_name}"
     cookbook cookbook_name
