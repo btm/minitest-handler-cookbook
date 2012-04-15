@@ -42,6 +42,30 @@ node[:recipes].each do |recipe|
   end
 end
 
+ruby_block "remove tests no longer used" do
+  block do
+    require 'set'
+    require 'fileutils'
+    Chef::Log.debug("before getting current_test_dirs")
+    current_test_dirs = node[:recipes].map do |recipe|
+      cookbook_name, recipe_name = recipe.split('::')
+      "#{node[:minitest][:path]}/#{cookbook_name}}"      
+    end
+    Chef::Log.debug("current_test_dirs are #{current_test_dirs}")
+    current_test_dirs_set = Set.new current_test_dirs
+    all_test_dirs = ::Dir["#{node[:minitest][:path]}/**/*"].select { |entry| File.directory? entry }
+    all_test_dirs_set = Set.new all_test_dirs
+    unused_test_dirs_set = all_test_dirs_set.difference current_test_dirs_set
+    unused_test_dirs_set.delete "#{node[:minitest][:path]}/chef_handler-default"
+    unused_test_dirs_set.delete "#{node[:minitest][:path]}/minitest-handler-recipes"
+    unless unused_test_dirs_set.empty?
+      Chef::Log.debug("Dirs to remove #{unused_test_dirs_set.entries}")
+      FileUtils.rm_rf unused_test_dirs_set.entries
+    end
+  end
+end
+
+
 handler = MiniTest::Chef::Handler.new({
   :path    => "#{node[:minitest][:path]}/**/*_test.rb",
   :verbose => true})

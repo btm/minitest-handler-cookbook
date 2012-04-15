@@ -23,12 +23,36 @@ node[:recipes].each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a delimiter
   cookbook_name, recipe_name = recipe.split('::')
   recipe_name = "default" if recipe_name.nil?
-  remote_directory "tests-#{cookbook_name}" do
+  remote_directory "tests #{cookbook_name}" do
     source "tests/minitest/#{recipe_name}"
     cookbook cookbook_name
-    path "#{node[:minitest][:path]}/#{cookbook_name}"
+    path "#{node[:minitest][:path]}/#{cookbook_name}-#{recipe_name}"
     purge true
     ignore_failure true
+  end
+end
+
+ruby_block "remove tests no longer used" do
+  block do
+    require 'set'
+    require 'fileutils'
+    Chef::Log.debug("before getting current_test_dirs")
+    current_test_dirs = node[:recipes].map do |recipe|
+      cookbook_name, recipe_name = recipe.split('::')
+      recipe_name = "default" if recipe_name.nil?
+      "#{node[:minitest][:path]}/#{cookbook_name}-#{recipe_name}"      
+    end
+    Chef::Log.debug("current_test_dirs are #{current_test_dirs}")
+    current_test_dirs_set = Set.new current_test_dirs
+    all_test_dirs = ::Dir["#{node[:minitest][:path]}/**/*"].select { |entry| File.directory? entry }
+    all_test_dirs_set = Set.new all_test_dirs
+    unused_test_dirs_set = all_test_dirs_set.difference current_test_dirs_set
+    unused_test_dirs_set.delete "#{node[:minitest][:path]}/chef_handler-default"
+    unused_test_dirs_set.delete "#{node[:minitest][:path]}/minitest-handler-recipes"
+    unless unused_test_dirs_set.empty?
+      Chef::Log.debug("Dirs to remove #{unused_test_dirs_set.entries}")
+      FileUtils.rm_rf unused_test_dirs_set.entries
+    end
   end
 end
 
