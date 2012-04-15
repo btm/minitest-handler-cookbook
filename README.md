@@ -56,6 +56,7 @@ Example
       end
     end
 
+<<<<<<< HEAD
 Changelog
 =====
 
@@ -67,3 +68,16 @@ Changelog
 ### v0.0.4
 
 Add examples/ top level directory (may not work)
+=======
+Recipes Usage
+=============
+
+This recipe works the same as default except that it only loads the
+tests for the recipes in the run_list rather than for all recipes
+inside a given cookbook.
+
+* The node run list should begin with 'recipe[chef_handler], recipe[chef-minitest::recipes]'
+* Each cookbook should contain tests in the 'tests/minitest/<recipe_name>' directory with a file suffix of '_test.rb'
+
+
+>>>>>>> Updated README
