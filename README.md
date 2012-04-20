@@ -9,7 +9,7 @@ Description
 This cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.
 
 minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler  
-stable minitest-handler cookbook: http://community.opscode.com/cookbook/minitest-handler  
+stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler  
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook  
 
 Attributes
