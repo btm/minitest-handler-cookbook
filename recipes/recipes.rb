@@ -14,12 +14,6 @@ require "minitest-chef-handler"
 r.run_action(:install)
 Gem.clear_paths
 
-# Download latest copy of minitest-chef-handler
-remote_file "minitest-chef-handler" do
-  source "https://raw.github.com/calavera/minitest-chef-handler/master/lib/minitest-chef-handler.rb"
-  path "#{node["chef_handler"]["handler_path"]}/minitest-chef-handler.rb"
-end
-
 # Directory to store cookbook tests
 directory node[:minitest][:path] do
   owner "root"
