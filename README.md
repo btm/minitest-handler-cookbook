@@ -17,13 +17,24 @@ Attributes
 
 node[:minitest][:path] - Location to store and find tests
 
-Usage
-=====
+Default Usage
+============
 
 * The node run list should begin with 'recipe[chef-minitest]'
 * Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
+
+Recipes Usage
+=============
+
+This recipe works the same as the default recipe except that it only
+loads tests for each recipe in the run_list rather than all test for
+cookbooks in the node's run_list.
+
+* The node run list should begin with 'recipe[chef-minitest::recipes]'
+* Each cookbook should contain tests in the 'files/default/tests/minitest/<recipe_name>' directory with a file suffix of '_test.rb'
+
 
 Example
 =====
@@ -45,6 +56,7 @@ Example
       end
     end
 
+<<<<<<< HEAD
 Changelog
 =====
 
@@ -56,3 +68,16 @@ Changelog
 ### v0.0.4
 
 Add examples/ top level directory (may not work)
+=======
+Recipes Usage
+=============
+
+This recipe works the same as default except that it only loads the
+tests for the recipes in the run_list rather than for all recipes
+inside a given cookbook.
+
+* The node run list should begin with 'recipe[chef_handler], recipe[chef-minitest::recipes]'
+* Each cookbook should contain tests in the 'tests/minitest/<recipe_name>' directory with a file suffix of '_test.rb'
+
+
+>>>>>>> Updated README
