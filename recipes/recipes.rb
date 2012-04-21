@@ -3,6 +3,14 @@ r = gem_package "minitest" do
   action :nothing
 end
 
+gem_package "minitest-chef-handler" do
+  action :nothing
+end.run_action(:install)
+
+Gem.clear_paths
+require "minitest-chef-handler"
+
+
 r.run_action(:install)
 Gem.clear_paths
 
