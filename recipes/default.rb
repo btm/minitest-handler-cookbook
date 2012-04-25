@@ -15,6 +15,7 @@ directory "minitest test location" do
   path node[:minitest][:path]
   owner "root"
   group "root"
+  recursive true
 end
 
 ruby_block "delete tests from old cookbooks" do
