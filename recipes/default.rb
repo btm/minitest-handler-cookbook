@@ -10,17 +10,25 @@ end.run_action(:install)
 Gem.clear_paths
 require "minitest-chef-handler"
 
+if Chef::Config[:solo]
+  recipes = node.run_list.map {|item| if item.type == :recipe ;  item.name ; end}
+else
+  recipes = node[:recipes]
+end
+
 # Directory to store cookbook tests
 directory "minitest test location" do
   path node[:minitest][:path]
   owner "root"
   group "root"
+  mode  0775
+  recursive true
 end
 
 ruby_block "delete tests from old cookbooks" do
   block do
     raise "minitest-handler cookbook could not find directory '#{node[:minitest][:path]}'" unless File.directory?(node[:minitest][:path])
-    expired_cookbooks = Dir.entries(node[:minitest][:path]).delete_if { |dir| dir == '.' || dir == '..' || node[:recipes].include?(dir) }
+    expired_cookbooks = Dir.entries(node[:minitest][:path]).delete_if { |dir| dir == '.' || dir == '..' || recipes.include?(dir) }
     expired_cookbooks.each do |cookbook|
       Chef::Log.info("Cookbook #{cookbook} no longer in run list, remove minitest tests")
       FileUtils.rm_rf "#{node[:minitest][:path]}/#{cookbook}"
@@ -29,15 +37,18 @@ ruby_block "delete tests from old cookbooks" do
 end
 
 # Search through all cookbooks in the run list for tests
-node[:recipes].each do |recipe|
-  # recipes is actually a list of cookbooks and recipes with :: as a delimiter
+recipes.each do |recipe|
+  # recipes is actually a list of cookbooks and recipes with :: as a
+  # delimiter
   cookbook_name = recipe.split('::').first
-  remote_directory "tests-#{cookbook_name}" do
-    source "tests/minitest"
-    cookbook cookbook_name
-    path "#{node[:minitest][:path]}/#{cookbook_name}"
-    purge true
-    ignore_failure true
+  if cookbook_name =~ /ark/
+    remote_directory "tests-#{cookbook_name}" do
+      source "tests/minitest"
+      cookbook cookbook_name
+      path "#{node[:minitest][:path]}/#{cookbook_name}"
+      purge true
+      #    ignore_failure true
+    end
   end
 end
 
