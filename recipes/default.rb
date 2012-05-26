@@ -8,6 +8,8 @@ gem_package "minitest-chef-handler" do
 end.run_action(:install)
 
 Gem.clear_paths
+# Ensure minitest gem is utilized
+gem "minitest"
 require "minitest-chef-handler"
 
 # Directory to store cookbook tests
