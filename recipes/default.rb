@@ -1,5 +1,6 @@
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
 gem_package "minitest" do
+  version "3.0.1"
   action :nothing
 end.run_action(:install)
 
