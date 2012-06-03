@@ -49,7 +49,7 @@ recipes.each do |recipe|
       cookbook cookbook_name
       path "#{node[:minitest][:path]}/#{cookbook_name}"
       purge true
-      #    ignore_failure true
+      ignore_failure true
     end
 end
 
