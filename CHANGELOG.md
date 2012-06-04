@@ -1,7 +1,11 @@
 Changelog
 =====
 
+### v0.0.7
 
+* Add better examples to the readme 
+* pass foodcritic
+	
 ### v0.0.6
 
 * MINITEST-HANDLER-COOKBOOK-12 ensure minitest gem used and not the standard library in 1.9
