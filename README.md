@@ -1,6 +1,6 @@
 Cookbook: minitest-handler  
 Author: Bryan McLellan <btm@loftninjas.org>  
-Author: Bryan W. Berry <bryan.berry@gmail.com>
+Author: Bryan W. Berry <bryan.berry@gmail.com>  
 Copyright: 2012 Opscode, Inc.  
 License: Apache 2.0  
 
