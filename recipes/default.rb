@@ -1,6 +1,6 @@
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
 gem_package "minitest" do
-  version node[:minitest][:gem_version]
+  version node['minitest']['gem_version']
   action :nothing
 end.run_action(:install)
 
@@ -16,12 +16,12 @@ require "minitest-chef-handler"
 if Chef::Config[:solo]
   recipes = node.run_list.map {|item| if item.type == :recipe ;  item.name ; end}
 else
-  recipes = node[:recipes]
+  recipes = node['recipes']
 end
 
 # Directory to store cookbook tests
 directory "minitest test location" do
-  path node[:minitest][:path]
+  path node['minitest']['path']
   owner "root"
   group "root"
   mode  0775
@@ -30,11 +30,11 @@ end
 
 ruby_block "delete tests from old cookbooks" do
   block do
-    raise "minitest-handler cookbook could not find directory '#{node[:minitest][:path]}'" unless File.directory?(node[:minitest][:path])
-    expired_cookbooks = Dir.entries(node[:minitest][:path]).delete_if { |dir| dir == '.' || dir == '..' || recipes.include?(dir) }
+    raise "minitest-handler cookbook could not find directory '#{node['minitest']['path']}'" unless File.directory?(node['minitest']['path'])
+    expired_cookbooks = Dir.entries(node['minitest']['path']).delete_if { |dir| dir == '.' || dir == '..' || recipes.include?(dir) }
     expired_cookbooks.each do |cookbook|
       Chef::Log.info("Cookbook #{cookbook} no longer in run list, remove minitest tests")
-      FileUtils.rm_rf "#{node[:minitest][:path]}/#{cookbook}"
+      FileUtils.rm_rf "#{node['minitest']['path']}/#{cookbook}"
     end
   end
 end
@@ -47,14 +47,14 @@ recipes.each do |recipe|
     remote_directory "tests-#{cookbook_name}" do
       source "tests/minitest"
       cookbook cookbook_name
-      path "#{node[:minitest][:path]}/#{cookbook_name}"
+      path "#{node['minitest']['path']}/#{cookbook_name}"
       purge true
       ignore_failure true
     end
 end
 
 handler = MiniTest::Chef::Handler.new({
-  :path    => "#{node[:minitest][:path]}/**/*_test.rb",
+  :path    => "#{node['minitest']['path']}/**/*_test.rb",
   :verbose => true})
 
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")

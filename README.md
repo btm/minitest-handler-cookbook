@@ -1,5 +1,6 @@
 Cookbook: minitest-handler  
 Author: Bryan McLellan <btm@loftninjas.org>  
+Author: Bryan W. Berry <bryan.berry@gmail.com>
 Copyright: 2012 Opscode, Inc.  
 License: Apache 2.0  
 
@@ -15,18 +16,20 @@ minitest-handler cookbook development: https://github.com/btm/minitest-handler-c
 Attributes
 ==========
 
-node[:minitest][:path] - Location to store and find tests
+node[:minitest][:path] - Location to store and find tests, defaults to /var/chef/minitest
 
 Usage
 =====
 
-* The node run list should begin with 'recipe[chef-minitest]'
+* The node run list should begin with 'recipe[chef_handler]', 'recipe[minitest-handler]'
 * Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
 
-Example
-=====
+Examples
+========
+
+### Tradition minitest
 
     class TestApache2 < MiniTest::Chef::TestCase
       def test_that_the_package_installed
@@ -45,3 +48,28 @@ Example
       end
     end
 
+
+### Using minitest/spec
+
+    require 'minitest/spec'
+
+    describe_recipe 'ark::test' do
+
+      # It's often convenient to load these includes in a separate
+      # helper along with
+      # your own helper methods, but here we just include them directly:
+      include MiniTest::Chef::Assertions
+      include MiniTest::Chef::Context
+      include MiniTest::Chef::Resources
+
+      it "installed the unzip package" do
+        package("unzip").must_be_installed
+      end
+
+      it "dumps the correct files into place with correct owner and group" do
+        file("/usr/local/foo_dump/foo1.txt").must_have(:owner, "foobarbaz").and(:group, "foobarbaz")
+      end
+
+     end
+
+For more detailed examples, see [here](https://github.com/calavera/minitest-chef-handler/blob/v0.4.0/examples/spec_examples/files/default/tests/minitest/example_test.rb)
