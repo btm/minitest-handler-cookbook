@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Minitest-handler-cookbook : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Minitest-handler-cookbook</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/btm/minitest-handler-cookbook">View on GitHub</a>
+
+          <h1 id="project_title">Minitest-handler-cookbook</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/btm/minitest-handler-cookbook/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/btm/minitest-handler-cookbook/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Cookbook: minitest-handler<br>
+Author: Bryan McLellan <a href="mailto:btm@loftninjas.org">btm@loftninjas.org</a><br>
+Author: Bryan W. Berry <a href="mailto:bryan.berry@gmail.com">bryan.berry@gmail.com</a>
+Copyright: 2012 Opscode, Inc.<br>
+License: Apache 2.0  </p>
+
+<h1>Description</h1>
+
+<p>This cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.</p>
+
+<p>minitest-chef-handler project: <a href="https://github.com/calavera/minitest-chef-handler">https://github.com/calavera/minitest-chef-handler</a><br>
+stable minitest-handler cookbook: <a href="http://community.opscode.com/cookbooks/minitest-handler">http://community.opscode.com/cookbooks/minitest-handler</a><br>
+minitest-handler cookbook development: <a href="https://github.com/btm/minitest-handler-cookbook">https://github.com/btm/minitest-handler-cookbook</a>  </p>
+
+<h1>Attributes</h1>
+
+<p>node[:minitest][:path] - Location to store and find tests, defaults to /var/chef/minitest</p>
+
+<h1>Usage</h1>
+
+<ul>
+<li>The node run list should begin with 'recipe[chef_handler]', 'recipe[minitest-handler]'</li>
+<li>Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'</li>
+</ul><p>Minitest: <a href="https://github.com/seattlerb/minitest">https://github.com/seattlerb/minitest</a></p>
+
+<h1>Examples</h1>
+
+<h3>Tradition minitest</h3>
+
+<pre><code>class TestApache2 &lt; MiniTest::Chef::TestCase
+  def test_that_the_package_installed
+    case node[:platform]
+    when "ubuntu","debian"
+      assert system('apt-cache policy apache2 | grep Installed | grep -v none')
+    end
+  end
+
+  def test_that_the_service_is_running
+    assert system('/etc/init.d/apache2 status')
+  end
+
+  def test_that_the_service_is_enabled
+    assert File.exists?(Dir.glob("/etc/rc5.d/S*apache2").first)
+  end
+end
+</code></pre>
+
+<h3>Using minitest/spec</h3>
+
+<pre><code>require 'minitest/spec'
+
+describe_recipe 'ark::test' do
+
+  # It's often convenient to load these includes in a separate
+  # helper along with
+  # your own helper methods, but here we just include them directly:
+  include MiniTest::Chef::Assertions
+  include MiniTest::Chef::Context
+  include MiniTest::Chef::Resources
+
+  it "installed the unzip package" do
+    package("unzip").must_be_installed
+  end
+
+  it "dumps the correct files into place with correct owner and group" do
+    file("/usr/local/foo_dump/foo1.txt").must_have(:owner, "foobarbaz").and(:group, "foobarbaz")
+  end
+
+ end
+</code></pre>
+
+<p>For more detailed examples, see <a href="https://github.com/calavera/minitest-chef-handler/blob/v0.4.0/examples/spec_examples/files/default/tests/minitest/example_test.rb">here</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Minitest-handler-cookbook maintained by <a href="https://github.com/btm">btm</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
