@@ -13,10 +13,10 @@ Gem.clear_paths
 gem "minitest"
 require "minitest-chef-handler"
 
-if Chef::Config[:solo]
+recipes = node['recipes']
+if recipes.empty? and Chef::Config[:solo]
+  #If you have roles listed in your run list they are NOT expanded
   recipes = node.run_list.map {|item| if item.type == :recipe ;  item.name ; end}
-else
-  recipes = node['recipes']
 end
 
 # Directory to store cookbook tests
