@@ -22,9 +22,9 @@ end
 # Directory to store cookbook tests
 directory "minitest test location" do
   path node['minitest']['path']
-  node['os'] != "windows" ? 'owner "root"' : ''
-  node['os'] != "windows" ? 'group "root"' : ''
-  node['os'] != "windows" ? 'mode "0775"' : ''
+  owner node['minitest']['owner']
+  group node['minitest']['group']
+  mode node['minitest']['mode']
   recursive true
 end
 
