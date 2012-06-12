@@ -16,7 +16,7 @@ require "minitest-chef-handler"
 recipes = node['recipes']
 if recipes.empty? and Chef::Config[:solo]
   #If you have roles listed in your run list they are NOT expanded
-  recipes = node.run_list.map {|item| if item.type == :recipe ;  item.name ; end}
+  recipes = node.run_list.map {|item| item.name if item.type == :recipe }
 end
 
 # Directory to store cookbook tests
