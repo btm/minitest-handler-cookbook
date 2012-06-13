@@ -1,7 +1,7 @@
 default['minitest']['gem_version'] = "3.0.1"
   
 
-case node['platform']
+case node['os']
 when "windows"
   default['minitest']['path'] = "/var/chef/minitest"
   #Usin nil to prevent this from being applied on Windows
