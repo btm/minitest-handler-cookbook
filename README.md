@@ -1,11 +1,14 @@
 Cookbook: minitest-handler  
 Author: Bryan McLellan <btm@loftninjas.org>  
 Author: Bryan W. Berry <bryan.berry@gmail.com>  
+Author: David Petzel <davidpetzel@gmail.com>
 Copyright: 2012 Opscode, Inc.  
 License: Apache 2.0  
 
 Description
 ===========
+
+# <a name="title"></a> minitest-handler [![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)
 
 This cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.
 
@@ -21,7 +24,7 @@ node[:minitest][:path] - Location to store and find tests, defaults to /var/chef
 Usage
 =====
 
-* The node run list should begin with 'recipe[chef_handler]', 'recipe[minitest-handler]'
+* The node run list should begin with 'recipe[minitest-handler]'
 * Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest

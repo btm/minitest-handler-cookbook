@@ -1,6 +1,13 @@
 Changelog
 =====
 
+### v0.0.9
+
+* add windows support tks to David Petzel
+* add travis-ci integration
+* change maintainer to Bryan W. Berry
+
+	
 ### v0.0.7
 
 * Add better examples to the readme 
