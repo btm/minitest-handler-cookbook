@@ -44,6 +44,7 @@ recipes.each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a
   # delimiter
   cookbook_name = recipe.split('::').first
+  if node.recipes.include?("#{cookbook_name}")  then
     remote_directory "tests-#{cookbook_name}" do
       source "tests/minitest"
       cookbook cookbook_name
@@ -51,6 +52,7 @@ recipes.each do |recipe|
       purge true
       ignore_failure true
     end
+  end
 end
 
 handler = MiniTest::Chef::Handler.new({
