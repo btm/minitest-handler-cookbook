@@ -56,7 +56,7 @@ recipes.each do |recipe|
 end
 
 handler = MiniTest::Chef::Handler.new({
-  :path    => "#{node['minitest']['path']}/**/*_test.rb",
+  :path    => "#{node['minitest']['path']}/#{node['minitest']['tests']}",
   :verbose => true})
 
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")
