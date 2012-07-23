@@ -19,7 +19,8 @@ minitest-handler cookbook development: https://github.com/btm/minitest-handler-c
 Attributes
 ==========
 
-node[:minitest][:path] - Location to store and find tests, defaults to /var/chef/minitest
+* node[:minitest][:path] - Location to store and find tests, defaults to `/var/chef/minitest`
+* node[:minitest][:tests] - Test files to run, defaults to `**/*_test.rb`
 
 Usage
 =====
