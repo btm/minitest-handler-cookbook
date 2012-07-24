@@ -44,7 +44,7 @@ recipes.each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a
   # delimiter
   cookbook_name = recipe.split('::').first
-  if node.recipes.include?(cookbook_name)  then
+  if node.recipes.any? { |recipe| recipe.split('::').first == cookbook_name }
     remote_directory "tests-#{cookbook_name}" do
       source "tests/minitest"
       cookbook cookbook_name
@@ -56,7 +56,7 @@ recipes.each do |recipe|
 end
 
 handler = MiniTest::Chef::Handler.new({
-  :path    => "#{node['minitest']['path']}/**/*_test.rb",
+  :path    => "#{node['minitest']['path']}/#{node['minitest']['tests']}",
   :verbose => true})
 
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")
