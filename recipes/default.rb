@@ -45,7 +45,7 @@ recipes.each do |recipe|
   cookbook_name,recipe_name = recipe.split('::')
   recipe_name ||= "default"
 
-  if node.recipes.any? { |recipe| recipe.split('::').first == cookbook_name }
+  if node['recipes'].any? { |recipe| recipe.split('::').first == cookbook_name }
     # create the parent directory
     directory "#{node['minitest']['path']}/#{cookbook_name}" do
       recursive true
