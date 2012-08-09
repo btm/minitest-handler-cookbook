@@ -1,16 +1,15 @@
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
-gem_package "minitest" do
+chef_gem "minitest" do
   version node['minitest']['gem_version']
   action :nothing
 end.run_action(:install)
 
-gem_package "minitest-chef-handler" do
+chef_gem "minitest-chef-handler" do
   action :nothing
 end.run_action(:install)
 
 Gem.clear_paths
 # Ensure minitest gem is utilized
-gem "minitest"
 require "minitest-chef-handler"
 
 recipes = node['recipes']
