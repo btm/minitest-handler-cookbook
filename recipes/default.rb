@@ -42,13 +42,18 @@ end
 recipes.each do |recipe|
   # recipes is actually a list of cookbooks and recipes with :: as a
   # delimiter
-  cookbook_name = recipe.split('::').first
+  cookbook_name,recipe_name = recipe.split('::')
+  recipe_name ||= "default"
+
   if node.recipes.any? { |recipe| recipe.split('::').first == cookbook_name }
-    remote_directory "tests-#{cookbook_name}" do
-      source "tests/minitest"
+    # create the parent directory
+    directory "#{node['minitest']['path']}/#{cookbook_name}" do
+      recursive true
+    end
+    cookbook_file "tests-#{cookbook_name}-#{recipe_name}" do
+      source "tests/minitest/#{recipe_name}_test.rb"
       cookbook cookbook_name
-      path "#{node['minitest']['path']}/#{cookbook_name}"
-      purge true
+      path "#{node['minitest']['path']}/#{cookbook_name}/#{recipe_name}_test.rb"
       ignore_failure true
     end
   end

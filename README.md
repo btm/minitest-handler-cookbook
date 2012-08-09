@@ -16,6 +16,9 @@ minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler
 stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler  
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook  
 
+*Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads 
+test files named "recipe-name_test.rb" rather than all test files in the path files/default/test/minitest/*_test.rb
+
 Attributes
 ==========
 
@@ -26,14 +29,14 @@ Usage
 =====
 
 * The node run list should begin with 'recipe[minitest-handler]'
-* Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file suffix of '_test.rb'
+* Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file with the name of 'your-recipe-name_test.rb' if you are testing the default recipe, the file should be named 'default_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
 
 Examples
 ========
 
-### Tradition minitest
+### Traditional minitest
 
     class TestApache2 < MiniTest::Chef::TestCase
       def test_that_the_package_installed
