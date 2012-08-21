@@ -19,6 +19,8 @@ minitest-handler cookbook development: https://github.com/btm/minitest-handler-c
 *Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads 
 test files named "recipe-name_test.rb" rather than all test files in the path files/default/test/minitest/*_test.rb
 
+If you have any helper libraries, place them in files/default/test/minitest/support/
+
 Attributes
 ==========
 
