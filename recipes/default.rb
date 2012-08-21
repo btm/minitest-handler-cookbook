@@ -58,7 +58,8 @@ recipes.each do |recipe|
     end
     # copy any helper files from the support directory
     remote_directory "tests-support-#{cookbook_name}-#{recipe_name}" do
-      source "tests/minitests/#{recipe_name}/support"
+      source "tests/minitest/support"
+      cookbook cookbook_name
       path "#{node['minitest']['path']}/#{cookbook_name}/support"
       recursive true
       ignore_failure true
