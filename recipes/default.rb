@@ -67,9 +67,12 @@ recipes.each do |recipe|
   end
 end
 
+ci_report = node['minitest']['ci_reports']
 handler = MiniTest::Chef::Handler.new({
   :path    => "#{node['minitest']['path']}/#{node['minitest']['tests']}",
-  :verbose => true})
+  :verbose => true,
+  :ci_reports => ci_report})
+
 
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")
 Chef::Config.send("report_handlers").delete_if {|v| v.class.to_s.include? MiniTest::Chef::Handler.to_s}
