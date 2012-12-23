@@ -50,19 +50,36 @@ recipes.each do |recipe|
     directory "#{node['minitest']['path']}/#{cookbook_name}" do
       recursive true
     end
-    cookbook_file "tests-#{cookbook_name}-#{recipe_name}" do
-      source "tests/minitest/#{recipe_name}_test.rb"
-      cookbook cookbook_name
-      path "#{node['minitest']['path']}/#{cookbook_name}/#{recipe_name}_test.rb"
-      ignore_failure true
+
+    ckbk = run_context.cookbook_collection[cookbook_name]
+    begin
+      # This will raise at compile-time if we can't find the cookbook_file
+      ckbk.preferred_manifest_record(node, 'files', "tests/minitest/#{recipe_name}_test.rb")
+
+      cookbook_file "tests-#{cookbook_name}-#{recipe_name}" do
+        source "tests/minitest/#{recipe_name}_test.rb"
+        cookbook cookbook_name
+        path "#{node['minitest']['path']}/#{cookbook_name}/#{recipe_name}_test.rb"
+        ignore_failure true
+      end
+    rescue Chef::Exceptions::FileNotFound
+      Chef::Log.warn "No tests found for #{recipe}!"
     end
-    # copy any helper files from the support directory
-    remote_directory "tests-support-#{cookbook_name}-#{recipe_name}" do
-      source "tests/minitest/support"
-      cookbook cookbook_name
-      path "#{node['minitest']['path']}/#{cookbook_name}/support"
-      recursive true
-      ignore_failure true
+
+    begin
+      # This will raise at compile-time if we can't find the directory
+      ckbk.preferred_manifest_records_for_directory(node, 'files', 'tests/minitest/support')
+
+      # copy any helper files from the support directory
+      remote_directory "tests-support-#{cookbook_name}-#{recipe_name}" do
+        source "tests/minitest/support"
+        cookbook cookbook_name
+        path "#{node['minitest']['path']}/#{cookbook_name}/support"
+        recursive true
+        ignore_failure true
+      end
+    rescue Chef::Exceptions::FileNotFound
+      Chef::Log.debug "No support files found for #{recipe}."
     end
   end
 end
@@ -74,4 +91,3 @@ handler = MiniTest::Chef::Handler.new({
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")
 Chef::Config.send("report_handlers").delete_if {|v| v.class.to_s.include? MiniTest::Chef::Handler.to_s}
 Chef::Config.send("report_handlers") << handler
-
