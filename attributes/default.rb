@@ -1,5 +1,6 @@
 default['minitest']['gem_version'] = "3.0.1"
 default['minitest']['tests'] = "**/*_test.rb"
+default['minitest']['verbose'] = true
 
 case node['os']
 when "windows"

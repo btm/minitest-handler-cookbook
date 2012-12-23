@@ -67,9 +67,15 @@ recipes.each do |recipe|
   end
 end
 
-handler = MiniTest::Chef::Handler.new({
+options = {
   :path    => "#{node['minitest']['path']}/#{node['minitest']['tests']}",
-  :verbose => true})
+  :verbose => node['minitest']['verbose']}
+# The following options can be omited
+options[:filter]     = node['minitest']['filter'] if node['minitest'].include? 'filter'
+options[:seed]       = node['minitest']['seed'] if node['minitest'].include? 'seed'
+options[:ci_reports] = node['minitest']['ci_reports'] if node['minitest'].include? 'ci_reports'
+
+handler = MiniTest::Chef::Handler.new(options)
 
 Chef::Log.info("Enabling minitest-chef-handler as a report handler")
 Chef::Config.send("report_handlers").delete_if {|v| v.class.to_s.include? MiniTest::Chef::Handler.to_s}
