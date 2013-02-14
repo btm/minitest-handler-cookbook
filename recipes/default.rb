@@ -12,7 +12,7 @@ Gem.clear_paths
 # Ensure minitest gem is utilized
 require "minitest-chef-handler"
 
-if Chef::VERSION < 11.0
+if Chef::VERSION < "11.0"
   seen_recipes = node.run_state[:seen_recipes]
   recipes = seen_recipes.keys.each { |i| i }
 else
