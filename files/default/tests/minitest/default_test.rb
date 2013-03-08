@@ -10,5 +10,7 @@ describe 'minitesthandler::default' do
 
   # For test examples, see:
   # https://github.com/calavera/minitest-chef-handler/blob/master/examples/spec_examples/files/default/tests/minitest/example_test.rb  
+  it 'runs no tests' do
+  end
 
 end
