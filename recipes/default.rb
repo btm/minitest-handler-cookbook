@@ -16,7 +16,7 @@ if Chef::VERSION < "11.0"
   seen_recipes = node.run_state[:seen_recipes]
   recipes = seen_recipes.keys.each { |i| i }
 else
-  recipes = node["run_list"]
+  recipes = run_context.loaded_recipes
 end
 
 if recipes.empty? and Chef::Config[:solo]
