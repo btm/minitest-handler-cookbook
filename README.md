@@ -1,9 +1,9 @@
-Cookbook: minitest-handler  
-Author: Bryan McLellan <btm@loftninjas.org>  
-Author: Bryan W. Berry <bryan.berry@gmail.com>  
-Author: David Petzel <davidpetzel@gmail.com>
-Copyright: 2012 Opscode, Inc.  
-License: Apache 2.0  
+Cookbook: minitest-handler<br/>
+Author: Bryan McLellan <btm@loftninjas.org><br/>
+Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
+Author: David Petzel <davidpetzel@gmail.com><br/>
+Copyright: 2012 Opscode, Inc.<br/>
+License: Apache 2.0<br/>
 
 Description
 ===========
@@ -12,11 +12,11 @@ Description
 
 This cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.
 
-minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler  
-stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler  
-minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook  
+minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler<br/>
+stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler<br/>
+minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook<br/>
 
-*Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads 
+*Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
 test files named "recipe-name_test.rb" rather than all test files in the path files/default/tests/minitest/*_test.rb
 
 If you have any helper libraries, place them in files/default/tests/minitest/support/
@@ -30,10 +30,10 @@ Attributes
 Usage
 =====
 
-* The node run list should include 'recipe[minitest-handler]'
-* Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file with the name of 'your-recipe-name_test.rb' if you are testing the default recipe, the file should be named 'default_test.rb'
+* add 'recipe[minitest-handler]' as last item in the run list
+* place tests in 'files/default/tests/minitest' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
 
-Minitest: https://github.com/seattlerb/minitest
+[Minitest](https://github.com/seattlerb/minitest)
 
 Examples
 ========
@@ -47,11 +47,11 @@ Examples
           assert system('apt-cache policy apache2 | grep Installed | grep -v none')
         end
       end
-    
+
       def test_that_the_service_is_running
         assert system('/etc/init.d/apache2 status')
       end
-    
+
       def test_that_the_service_is_enabled
         assert File.exists?(Dir.glob("/etc/rc5.d/S*apache2").first)
       end
