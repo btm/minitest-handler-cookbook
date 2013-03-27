@@ -30,7 +30,7 @@ Attributes
 Usage
 =====
 
-* The node run list should begin with 'recipe[minitest-handler]'
+* The node run list should include 'recipe[minitest-handler]'
 * Each cookbook should contain tests in the 'files/default/tests/minitest' directory with a file with the name of 'your-recipe-name_test.rb' if you are testing the default recipe, the file should be named 'default_test.rb'
 
 Minitest: https://github.com/seattlerb/minitest
@@ -63,13 +63,6 @@ Examples
     require 'minitest/spec'
 
     describe_recipe 'ark::test' do
-
-      # It's often convenient to load these includes in a separate
-      # helper along with
-      # your own helper methods, but here we just include them directly:
-      include MiniTest::Chef::Assertions
-      include MiniTest::Chef::Context
-      include MiniTest::Chef::Resources
 
       it "installed the unzip package" do
         package("unzip").must_be_installed
