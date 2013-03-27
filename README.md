@@ -30,7 +30,7 @@ Attributes
 Usage
 =====
 
-* add 'recipe[minitest-handler]' as last item in the run list
+* add 'recipe[minitest-handler]' somewhere on your run_list, but preferably last
 * place tests in 'files/default/tests/minitest' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
 
 [Minitest](https://github.com/seattlerb/minitest)
