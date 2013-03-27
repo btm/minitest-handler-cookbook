@@ -12,17 +12,7 @@ Gem.clear_paths
 # Ensure minitest gem is utilized
 require "minitest-chef-handler"
 
-if Chef::VERSION < "11.0"
-  seen_recipes = node.run_state[:seen_recipes]
-  recipes = seen_recipes.keys.each { |i| i }
-else
-  recipes = run_context.loaded_recipes
-end
-
-if recipes.empty? and Chef::Config[:solo]
-  #If you have roles listed in your run list they are NOT expanded
-  recipes = node.run_list.map {|item| item.name if item.type == :recipe }
-end
+recipes = node.run_list.expand(node.chef_environment).recipes
 
 # Directory to store cookbook tests
 directory "minitest test location" do
