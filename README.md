@@ -1,6 +1,6 @@
 Cookbook: minitest-handler<br/>
-Author: Bryan McLellan <btm@loftninjas.org><br/>
 Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
+Author: Bryan McLellan <btm@loftninjas.org><br/>
 Author: David Petzel <davidpetzel@gmail.com><br/>
 Copyright: 2012 Opscode, Inc.<br/>
 License: Apache 2.0<br/>
@@ -10,28 +10,45 @@ Description
 
 # <a name="title"></a> minitest-handler [![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)
 
-This cookbook utilizes the minitest-chef-handler project to facilitate cookbook testing.
+This cookbook utilizes the minitest-chef-handler project to facilitate
+cookbook testing. By default, minitest-handler will collect all the
+tests in your cookbook_path and run them. 
 
 minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler<br/>
 stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler<br/>
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook<br/>
 
+*Note*: Version 0.1.8 introduced deprecated use of
+files/default/tests/minitest/*_test.rb and the location of support files
 *Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
-test files named "recipe-name_test.rb" rather than all test files in the path files/default/tests/minitest/*_test.rb
+test files named "<recipe-name>_test.rb" rather than all test files in the path files/default/tests/minitest/*_test.rb
 
-If you have any helper libraries, place them in files/default/tests/minitest/support/
+If you have any helper libraries, they should match files/default/*helper.rb
 
 Attributes
 ==========
 
-* node[:minitest][:path] - Location to store and find tests, defaults to `/var/chef/minitest`
+* node[:minitest][:path] - Location to store and find tests, defaults
+  to `/var/chef/minitest`
+* node[:minitest][:recipes] - defaults to empty and is populated with
+  the names of all recipes included during the chef run, whether by
+  insertion to the run_list, inclusion through a role, or added with
+  `include_recipe`. If you only want tests for select recipes to run,
+  override this value with the names of the recipes that you want tested.
+* node[:minitest][:filter] - filter test names on a pattern
+* node[:minitest][:seed] - set random seed
+* node[:minitest][:ci_reports] - path to write out the result of each
+  test in a JUnit-compatible XML file, parseable by many CI platforms
 * node[:minitest][:tests] - Test files to run, defaults to `**/*_test.rb`
 
 Usage
 =====
 
 * add 'recipe[minitest-handler]' somewhere on your run_list, but preferably last
-* place tests in 'files/default/tests/minitest' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
+* place tests in 'files/default/' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
+* put any helper functions you have in files/tests/spec_helper.rb but
+  minitest-handler will ensure that you have access to any file that
+  matches the glob files/tests/*helper.rb
 
 [Minitest](https://github.com/seattlerb/minitest)
 
