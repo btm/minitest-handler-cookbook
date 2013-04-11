@@ -86,7 +86,7 @@ ruby_block "load tests" do
 
     options = {
       :path => "#{node[:minitest][:path]}/#{node[:minitest][:tests]}",
-      :verbose => node[:minitest]['verbose']}
+      :verbose => node[:minitest][:verbose]}
     # The following options can be omited
     options[:filter]     = node[:minitest][:filter] if node[:minitest].include? 'filter'
     options[:seed]       = node[:minitest][:seed] if node[:minitest].include? 'seed'
