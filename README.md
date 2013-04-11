@@ -75,6 +75,7 @@ Examples
     end
 
 
+
 ### Using minitest/spec
 
     require 'minitest/spec'
@@ -92,3 +93,16 @@ Examples
      end
 
 For more detailed examples, see [here](https://github.com/calavera/minitest-chef-handler/blob/v0.4.0/examples/spec_examples/files/default/tests/minitest/example_test.rb)
+
+
+### Testing this cookbook
+
+This cookbook currently uses [test-kitchen 1.0](https://github.com/opscode/test-kitchen/tree/1.0) and the
+[kitchen-lxc](https://github.com/portertech/kitchen-lxc) driver to run
+tests. It was tested using ubuntu 12.04 w/ the packages `lxc` and
+`lxctl` installed.
+
+You will need to place this
+[base lxc script](https://gist.github.com/bryanwb/5361988) in the file
+`/usr/share/lxc/templates/lxc-ubuntu-cycle` and execute `sudo lxc-create
+-n ubuntu-cycle` prior to running any kitchen commands.

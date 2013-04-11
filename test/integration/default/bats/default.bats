@@ -13,7 +13,7 @@
 }
 
 @test "copies non-default test" {
-  [ -f "/var/chef/minitest/minitest-handler_test1/non_default_test.rb" ]
+  [ -f "/var/chef/minitest/minitest-handler_test1/not_default_test.rb" ]
 }
         
 @test "copies support file" {

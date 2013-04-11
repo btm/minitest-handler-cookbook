@@ -71,12 +71,15 @@ ruby_block "load tests" do
         # for backwards compatibility for dumb idea of putting support files in support/
         support_files.each do |f|
           if f =~ /tests\/minitest\/support/
-            dest = "#{node[:minitest][:path]}/#{cookbook_name}/support/"
-            FileUtils.mkdir dest
+            dest_dir = "#{node[:minitest][:path]}/#{cookbook_name}/support/"
+            begin
+              FileUtils.mkdir dest_dir
+            rescue Errno::EEXIST
+            end
           else
-            dest = "#{node[:minitest][:path]}/#{cookbook_name}/"
+            dest_dir = "#{node[:minitest][:path]}/#{cookbook_name}/"
           end
-          FileUtils.cp support_files, "#{node[:minitest][:path]}/#{cookbook_name}/"
+          FileUtils.cp support_files, dest_dir
         end
       end
     end
