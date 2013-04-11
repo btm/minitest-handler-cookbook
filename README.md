@@ -106,3 +106,9 @@ You will need to place this
 [base lxc script](https://gist.github.com/bryanwb/5361988) in the file
 `/usr/share/lxc/templates/lxc-ubuntu-cycle` and execute `sudo lxc-create
 -n ubuntu-cycle` prior to running any kitchen commands.
+
+All tests are written using
+[BATS](https://github.com/sstephenson/bats), which is essentially
+bash. I did this because I did not want to use minitest-handler or
+minitest-chef-handler to test itself. For more examples of bats than are in this cookbook, see
+the [chef-rvm](https://github.com/fnichol/chef-rvm), [chef-ruby_build](https://github.com/fnichol/chef-ruby_build), and [chef-rbenv](https://github.com/fnichol/chef-rbenv) cookbooks.
