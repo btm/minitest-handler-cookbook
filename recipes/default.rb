@@ -1,8 +1,10 @@
-# Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
-chef_gem "minitest" do
-  version node[:minitest][:gem_version]
-  action :nothing
-end.run_action(:install)
+if Chef::VERSION.to_f < 10.10
+  # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
+  chef_gem "minitest" do
+    version node[:minitest][:gem_version]
+    action :nothing
+  end.run_action(:install)
+end
 
 chef_gem "minitest-chef-handler" do
   action :nothing
@@ -26,6 +28,8 @@ end
 # Search through all cookbooks in the run list for tests
 ruby_block "load tests" do
   block do
+    require 'fileutils'
+    
     unless node[:minitest][:recipes].empty?
       recipes = node[:minitest][:recipes].dup
     else
@@ -56,14 +60,24 @@ ruby_block "load tests" do
       dir.recursive(true)
       dir.run_action :create
 
-      tests = ::Dir["#{Chef::Config[:cookbook_path]}/#{cookbook_name}/files/default/**/_test.rb"]
+      tests = ::Dir["#{Chef::Config[:cookbook_path]}/#{cookbook_name}/files/default/**/#{recipe_name}_test.rb"]
       unless tests.empty?
         FileUtils.cp tests, "#{node[:minitest][:path]}/#{cookbook_name}/"
       end
       
       support_files = ::Dir["#{Chef::Config[:cookbook_path]}/#{cookbook_name}/files/default/**/*helper*.rb"]
       unless support_files.empty?
-        FileUtils.cp support_files, "#{node[:minitest][:path]}/#{cookbook_name}/"
+        # do this in a loop to preserve directory structure
+        # for backwards compatibility for dumb idea of putting support files in support/
+        support_files.each do |f|
+          if f =~ /tests\/minitest\/support/
+            dest = "#{node[:minitest][:path]}/#{cookbook_name}/support/"
+            FileUtils.mkdir dest
+          else
+            dest = "#{node[:minitest][:path]}/#{cookbook_name}/"
+          end
+          FileUtils.cp support_files, "#{node[:minitest][:path]}/#{cookbook_name}/"
+        end
       end
     end
 

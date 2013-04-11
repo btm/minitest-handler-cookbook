@@ -23,7 +23,7 @@ files/default/tests/minitest/*_test.rb and the location of support files
 *Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
 test files named "<recipe-name>_test.rb" rather than all test files in the path files/default/tests/minitest/*_test.rb
 
-If you have any helper libraries, they should match files/default/*helper.rb
+If you have any helper libraries, they should match files/default/**/*helper*.rb
 
 Attributes
 ==========

@@ -1,0 +1,30 @@
+---
+driver_plugin: lxc
+
+platforms:
+- name: ubuntu12
+  driver_config:
+    base_container: ubuntu-cycle
+    username: ubuntu
+    password: ubuntu
+
+suites:
+- name: default
+  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test1]", "recipe[minitest-handler_test1::not_default]"]
+
+- name: legacy_paths
+  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test2::legacy_paths]"]
+  attributes:
+    minitest: 
+      recipes: [ "minitest-handler_test2::legacy_paths" ] 
+
+- name: include_recipe
+  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test2]"]
+
+# TODO: test that files copied which are pulled in from role
+#- name: include_from_role
+#  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test2::role]"]
+#  attributes:
+#    minitest: 
+#      recipes: [ "minitest-handler_test2::role" ] 
+
