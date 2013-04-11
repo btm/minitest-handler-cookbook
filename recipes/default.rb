@@ -1,10 +1,10 @@
-if Chef::VERSION.to_f < 10.10
-  # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
-  chef_gem "minitest" do
-    version node[:minitest][:gem_version]
-    action :nothing
-  end.run_action(:install)
-end
+# Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
+chef_gem "minitest" do
+  version node[:minitest][:gem_version]
+  action :nothing
+  only_if { Chef::VERSION.to_f < 10.10 }
+end.run_action(:install)
+
 
 chef_gem "minitest-chef-handler" do
   action :nothing
@@ -85,12 +85,12 @@ ruby_block "load tests" do
     end
 
     options = {
-      :path => "#{node[:minitest][:path]}/#{node[:minitest]['tests']}",
+      :path => "#{node[:minitest][:path]}/#{node[:minitest][:tests]}",
       :verbose => node[:minitest]['verbose']}
     # The following options can be omited
-    options[:filter]     = node[:minitest]['filter'] if node[:minitest].include? 'filter'
-    options[:seed]       = node[:minitest]['seed'] if node[:minitest].include? 'seed'
-    options[:ci_reports] = node[:minitest]['ci_reports'] if node[:minitest].include? 'ci_reports'
+    options[:filter]     = node[:minitest][:filter] if node[:minitest].include? 'filter'
+    options[:seed]       = node[:minitest][:seed] if node[:minitest].include? 'seed'
+    options[:ci_reports] = node[:minitest][:ci_reports] if node[:minitest].include? 'ci_reports'
 
     handler = MiniTest::Chef::Handler.new(options)
 
