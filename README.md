@@ -18,12 +18,14 @@ minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler
 stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler<br/>
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook<br/>
 
-*Note*: Version 0.1.8 introduced deprecated use of
-files/default/tests/minitest/*_test.rb and the location of support files
+*Note*: Version 0.1.8 deprecated use of
+files/default/tests/minitest/*_test.rb and the location of support
+files. Test files should now be located in
+files/default/test/*_test.rb
 *Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
-test files named "<recipe-name>_test.rb" rather than all test files in the path files/default/tests/minitest/*_test.rb
+test files named "<recipe-name>_test.rb" rather than all test files in the path files/default/test/*_test.rb
 
-If you have any helper libraries, they should match files/default/**/*helper*.rb
+If you have any helper libraries, they should match files/default/test/*helper*.rb
 
 Attributes
 ==========
@@ -44,11 +46,12 @@ Attributes
 Usage
 =====
 
-* add 'recipe[minitest-handler]' somewhere on your run_list, but preferably last
-* place tests in 'files/default/' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
-* put any helper functions you have in files/tests/spec_helper.rb but
+* add 'recipe[minitest-handler]' somewhere on your run_list,
+  preferably last
+* place tests in 'files/default/test/' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
+* put any helper functions you have in files/default/test/spec_helper.rb but
   minitest-handler will ensure that you have access to any file that
-  matches the glob files/tests/*helper.rb
+  matches the glob files/test/*helper.rb
 
 [Minitest](https://github.com/seattlerb/minitest)
 
@@ -99,13 +102,10 @@ For more detailed examples, see [here](https://github.com/calavera/minitest-chef
 
 This cookbook currently uses [test-kitchen 1.0](https://github.com/opscode/test-kitchen/tree/1.0) and the
 [kitchen-lxc](https://github.com/portertech/kitchen-lxc) driver to run
-tests. It was tested using ubuntu 12.04 w/ the packages `lxc` and
-`lxctl` installed.
-
-You will need to place this
-[base lxc script](https://gist.github.com/bryanwb/5361988) in the file
-`/usr/share/lxc/templates/lxc-ubuntu-cycle` and execute `sudo lxc-create
--n ubuntu-cycle` prior to running any kitchen commands.
+tests. The easiest way to put everything in place for proper lxc
+functioning is to install the vagabond gem and execute `vagabond
+init`. This command will run chef-solo to configure LXC and put the
+proper LXC templates in place.
 
 All tests are written using
 [BATS](https://github.com/sstephenson/bats), which is essentially
