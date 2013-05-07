@@ -60,12 +60,16 @@ ruby_block "load tests" do
       dir.recursive(true)
       dir.run_action :create
 
-      tests = ::Dir["#{Chef::Config[:cookbook_path]}/#{cookbook_name}/files/default/**/#{recipe_name}_test.rb"]
+      tests = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
+        ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/**/#{recipe_name}_test.rb"]
+      end.flatten(1)
       unless tests.empty?
         FileUtils.cp tests, "#{node[:minitest][:path]}/#{cookbook_name}/"
       end
       
-      support_files = ::Dir["#{Chef::Config[:cookbook_path]}/#{cookbook_name}/files/default/**/*helper*.rb"]
+      support_files = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
+        ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/**/*helper*.rb"]
+      end.flatten(1)
       unless support_files.empty?
         # do this in a loop to preserve directory structure
         # for backwards compatibility for dumb idea of putting support files in support/
