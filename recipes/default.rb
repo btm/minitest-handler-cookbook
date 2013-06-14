@@ -81,27 +81,28 @@ ruby_block "load tests" do
       # as that results in tests running for recipes not in the runlist
       # and the provider is going to copy them into the cookbook cache
       # automatically, just essentially set the path to a bogus location
-     
-      ckbk = run_context.cookbook_collection[cookbook_name]
-      # Support both old and new locations
-      old_path = "tests/minitest"
-      new_path = "test"
-      
-      [old_path, new_path].each do |test_path|
-        begin
-          # This will raise at compile-time if we can't find the directory
-          ckbk.preferred_manifest_records_for_directory(node, 'files', old_path)
+      unless Chef::Config[:solo]
+        ckbk = run_context.cookbook_collection[cookbook_name]
+        # Support both old and new locations
+        old_path = "tests/minitest"
+        new_path = "test"
+        
+        [old_path, new_path].each do |test_path|
+          begin
+            # This will raise at compile-time if we can't find the directory
+            ckbk.preferred_manifest_records_for_directory(node, 'files', old_path)
 
-          # copy the test files
-          ckbk_d = Chef::Resource::RemoteDirectory.new("tests-support-#{cookbook_name}-#{recipe_name}", run_context)
-          ckbk_d.source test_path
-          ckbk_d.cookbook cookbook_name
-          ckbk_d.path ::File.join(scratch_dir, cookbook_name)
-          ckbk_d.recursive true
-          ckbk_d.ignore_failure true
-          ckbk_d.run_action :create
-        rescue Chef::Exceptions::FileNotFound
-          Chef::Log.debug "No test file directory found at #{test_path}."
+            # copy the test files
+            ckbk_d = Chef::Resource::RemoteDirectory.new("tests-support-#{cookbook_name}-#{recipe_name}", run_context)
+            ckbk_d.source test_path
+            ckbk_d.cookbook cookbook_name
+            ckbk_d.path ::File.join(scratch_dir, cookbook_name)
+            ckbk_d.recursive true
+            ckbk_d.ignore_failure true
+            ckbk_d.run_action :create
+          rescue Chef::Exceptions::FileNotFound
+            Chef::Log.debug "No test file directory found at #{test_path}."
+          end
         end
       end
       
