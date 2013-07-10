@@ -90,7 +90,7 @@ ruby_block "load tests" do
         [old_path, new_path].each do |test_path|
           begin
             # This will raise at compile-time if we can't find the directory
-            ckbk.preferred_manifest_records_for_directory(node, 'files', old_path)
+            ckbk.preferred_manifest_records_for_directory(node, 'files', test_path)
 
             # copy the test files
             ckbk_d = Chef::Resource::RemoteDirectory.new("tests-support-#{cookbook_name}-#{recipe_name}", run_context)
