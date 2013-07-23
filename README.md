@@ -18,30 +18,44 @@ minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler
 stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler<br/>
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook<br/>
 
-*Note*: Version 0.1.8 deprecated use of
+**Note**: Version 0.1.8 deprecated use of
 files/default/tests/minitest/*_test.rb and the location of support
 files. Test files should now be located in
 files/default/test/*_test.rb
-*Note*: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
-test files named "<recipe-name>_test.rb" rather than all test files in the path files/default/test/*_test.rb
 
-If you have any helper libraries, they should match files/default/test/*helper*.rb
+**Note**: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
+test files named "<recipe-name>_test.rb" rather than all test files in the path `files/default/test/*_test.rb`
+
+If you have any helper libraries, they should match `files/default/test/*helper*.rb`
 
 Attributes
 ==========
-
-* node[:minitest][:path] - Location to store and find tests, defaults
-  to `/var/chef/minitest`
-* node[:minitest][:recipes] - defaults to empty and is populated with
-  the names of all recipes included during the chef run, whether by
-  insertion to the run_list, inclusion through a role, or added with
-  `include_recipe`. If you only want tests for select recipes to run,
+* `node[:minitest][:gem_version]` - The version of the [minitest](http://rubygems.org/gems/minitest)
+  gem to install and use. 
+  * Default: 3.0.1
+* `node[:minitest][:chef_handler_gem_version]` - The version of the [minitest-chef-handler](http://rubygems.org/gems/minitest-chef-handler)
+  gem to install and use. 
+  * Default: 1.0.1
+* `node[:minitest][:path]` - Location to store and find test files. 
+  * Default: `/var/chef/minitest`
+* `node[:minitest][:recipes]` - The names of all recipes included during the 
+  chef run, whether by insertion to the run_list, inclusion through a role, or 
+  added with `include_recipe`. If you only want tests for select recipes to run,
   override this value with the names of the recipes that you want tested.
-* node[:minitest][:filter] - filter test names on a pattern
-* node[:minitest][:seed] - set random seed
-* node[:minitest][:ci_reports] - path to write out the result of each
+  * Default: []
+* `node[:minitest][:filter]` - Filter test names on a pattern (regex)
+  * Default: `nil`
+  * Example: `/apache2/` could be used to *only* run tests for recipes with a
+    starting with apache2
+* `node[:minitest][:seed]` - Set random seed
+  * Default: `nil`
+* `node[:minitest][:ci_reports]` - Path to write out the result of each
   test in a JUnit-compatible XML file, parseable by many CI platforms
-* node[:minitest][:tests] - Test files to run, defaults to `**/*_test.rb`
+  * Default: `nil`
+* `node[:minitest][:tests]` - Test files to run.
+  * Default to `**/*_test.rb`
+* `node[:minitest][:verbose]` - Display verbose output
+  * Default: true
 
 Usage
 =====
