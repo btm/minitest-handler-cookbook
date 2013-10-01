@@ -1,7 +1,7 @@
 Cookbook: minitest-handler<br/>
+Author: David Petzel <davidpetzel@gmail.com><br/>
 Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
 Author: Bryan McLellan <btm@loftninjas.org><br/>
-Author: David Petzel <davidpetzel@gmail.com><br/>
 Copyright: 2012 Opscode, Inc.<br/>
 License: Apache 2.0<br/>
 

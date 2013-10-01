@@ -1,6 +1,13 @@
 Changelog
 =====
 
+### 1.0.0
+
+* Check both paths in files
+* Wrap the new to guard against chef solo per bryanwb's suggestion
+* Force a download of testing files from chef server
+* Fix test/support files detection when `cookbook_path` is an Array
+
 ### v0.2.0
 
 The path for placing your tests is now files/default/test/ however
