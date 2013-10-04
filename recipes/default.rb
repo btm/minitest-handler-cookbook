@@ -7,6 +7,7 @@ end.run_action(:install)
 
 
 chef_gem "minitest-chef-handler" do
+  version node[:minitest][:chef_handler_gem_version]
   action :nothing
 end.run_action(:install)
 
