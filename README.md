@@ -114,15 +114,16 @@ For more detailed examples, see [here](https://github.com/calavera/minitest-chef
 
 ### Testing this cookbook
 
-This cookbook currently uses [test-kitchen 1.0](https://github.com/opscode/test-kitchen/tree/1.0) and the
-[kitchen-lxc](https://github.com/portertech/kitchen-lxc) driver to run
-tests. The easiest way to put everything in place for proper lxc
-functioning is to install the vagabond gem and execute `vagabond
-init`. This command will run chef-solo to configure LXC and put the
-proper LXC templates in place.
+This cookbook currently uses [test-kitchen](https://github.com/opscode/test-kitchen)
+along with the [kitchen-vagrant](https://github.com/opscode/kitchen-vagrant).
 
-All tests are written using
-[BATS](https://github.com/sstephenson/bats), which is essentially
-bash. I did this because I did not want to use minitest-handler or
-minitest-chef-handler to test itself. For more examples of bats than are in this cookbook, see
-the [chef-rvm](https://github.com/fnichol/chef-rvm), [chef-ruby_build](https://github.com/fnichol/chef-ruby_build), and [chef-rbenv](https://github.com/fnichol/chef-rbenv) cookbooks.
+All test are currently written using [BATS](https://github.com/sstephenson/bats), 
+which is essentially bash. Using BATS was done so that minitest-handler nor
+minitest-chef-handler were used to test itself. For more examples of bats than 
+are in this cookbook, see the [chef-rvm](https://github.com/fnichol/chef-rvm), 
+[chef-ruby_build](https://github.com/fnichol/chef-ruby_build), and 
+[chef-rbenv](https://github.com/fnichol/chef-rbenv) cookbooks.
+
+**NOTE** A known limitation of using BATS is that the cookbook is not currently
+tested on Windows machines. See https://github.com/btm/minitest-handler-cookbook/issues/45
+for more of the background on this.
