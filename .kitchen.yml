@@ -1,23 +1,36 @@
 ---
-driver_plugin: lxc
+driver_plugin: vagrant
 driver_config:
-  base_container: ubuntu_1204
-  username: ubuntu
-  password: ubuntu
+  require_chef_omnibus: true
 
 platforms:
-- name: ubuntu_1204
+- name: ubuntu-12.04
+  driver_config:
+    box: opscode-ubuntu-12.04
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+    
+- name: centos-6.4
+  driver_config:
+    box: opscode-centos-6.4
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
 
 suites:
 - name: default
-  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test1]", "recipe[minitest-handler_test1::not_default]"]
+  run_list:
+    - recipe[minitest-handler
+    - recipe[minitest-handler_test1]
+    - recipe[minitest-handler_test1::not_default]
 
 - name: legacy_paths
-  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test2::legacy_paths]"]
+  run_list:
+    - recipe[minitest-handler]
+    - recipe[minitest-handler_test2::legacy_paths]
   attributes:
     minitest: 
       recipes: [ "minitest-handler_test2::legacy_paths" ] 
 
 - name: include_recipe
-  run_list: ["recipe[minitest-handler]", "recipe[minitest-handler_test2]"]
+  run_list:
+    - recipe[minitest-handler]
+    - recipe[minitest-handler_test2]
 
