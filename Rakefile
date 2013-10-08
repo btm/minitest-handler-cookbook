@@ -2,13 +2,13 @@
 
 @cookbook = "minitest-handler-cookbook"
 
-desc "Runs foodcritc linter"
+desc "Runs foodcritic linter"
 task :foodcritic do
   if Gem::Version.new("1.9.2") <= Gem::Version.new(RUBY_VERSION.dup)
     sandbox = File.join(File.dirname(__FILE__), %w{tmp foodcritic}, @cookbook)
     prepare_foodcritic_sandbox(sandbox)
 
-    sh "foodcritic --version; foodcritic --epic-fail any #{File.dirname(sandbox)}"
+    sh "foodcritic --epic-fail any #{File.dirname(sandbox)}"
   else
     puts "WARN: foodcritic run is skipped as Ruby #{RUBY_VERSION} is < 1.9.2."
   end
