@@ -1,6 +1,14 @@
 Changelog
 =====
 
+### 1.1.0 (NOT RELEASED)
+
+* [#47](https://github.com/btm/minitest-handler-cookbook/issues/47) -
+  Control the version of minitest-chef-handler gem via node attribute
+* [#45](https://github.com/btm/minitest-handler-cookbook/issues/45) -
+  Switch test-kitchen from lxc driver to vagrant driver, allowing tests
+  to be run on Windows based host (Windows VMs still not supported)
+
 ### 1.0.0
 
 * Check both paths in files
