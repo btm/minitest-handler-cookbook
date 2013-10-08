@@ -19,9 +19,9 @@ stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minites
 minitest-handler cookbook development: https://github.com/btm/minitest-handler-cookbook<br/>
 
 **Note**: Version 0.1.8 deprecated use of
-files/default/tests/minitest/*_test.rb and the location of support
+``files/default/tests/minitest/*_test.rb`` and the location of support
 files. Test files should now be located in
-files/default/test/*_test.rb
+``files/default/test/*_test.rb``
 
 **Note**: Version 0.1.0 added a change that breaks backward compatibility. The minitest-handler now only loads<br/>
 test files named "<recipe-name>_test.rb" rather than all test files in the path `files/default/test/*_test.rb`
@@ -45,8 +45,8 @@ Attributes
   * Default: []
 * `node[:minitest][:filter]` - Filter test names on a pattern (regex)
   * Default: `nil`
-  * Example: `/apache2/` could be used to *only* run tests for recipes with a
-    starting with apache2
+  * Example: `/apache2/` could be used to *only* run tests for recipes with
+    starting with *apache2*
 * `node[:minitest][:seed]` - Set random seed
   * Default: `nil`
 * `node[:minitest][:ci_reports]` - Path to write out the result of each
@@ -60,12 +60,12 @@ Attributes
 Usage
 =====
 
-* add 'recipe[minitest-handler]' somewhere on your run_list,
-  preferably last
-* place tests in 'files/default/test/' with the name 'your-recipe-name_test.rb' (default recipe is named 'default_test.rb')
-* put any helper functions you have in files/default/test/spec_helper.rb but
+* Add ``recipe[minitest-handler]`` somewhere on your run_list, preferably last
+* Place tests in ``files/default/test/`` with the name **your-recipe-name\_test.rb**
+  (default recipe is named **default_test.rb**)
+* Put any helper functions you have in ``files/default/test/spec_helper.rb`` but
   minitest-handler will ensure that you have access to any file that
-  matches the glob files/test/*helper.rb
+  matches the glob ``files/test/*helper.rb``
 
 [Minitest](https://github.com/seattlerb/minitest)
 

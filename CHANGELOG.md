@@ -8,15 +8,17 @@ Changelog
 * [#45](https://github.com/btm/minitest-handler-cookbook/issues/45) -
   Switch test-kitchen from lxc driver to vagrant driver, allowing tests
   to be run on Windows based host (Windows VMs still not supported)
+* Moving long ruby block inoto a helper library to address 
+  [FC014](http://acrmp.github.io/foodcritic/#FC014) 
 
-### 1.0.0
+### 1.0.0 (Oct 01, 2013)
 
 * Check both paths in files
 * Wrap the new to guard against chef solo per bryanwb's suggestion
 * Force a download of testing files from chef server
 * Fix test/support files detection when `cookbook_path` is an Array
 
-### v0.2.0
+### v0.2.0 (May 05, 2013)
 
 The path for placing your tests is now files/default/test/ however
 this change is backwards compatible, the minitest-hander::default
@@ -40,30 +42,30 @@ Niceties:
 * Added tests w/ test-kitchen 1.0, kitchen-lxc, and BATS
 * huge code cleanup
 
-### v0.0.9
+### v0.0.9 (Jun 14, 2012)
 
 * add windows support tks to David Petzel
 * add travis-ci integration
 * change maintainer to Bryan W. Berry
 
 	
-### v0.0.7
+### v0.0.7 (Jun 04, 2012)
 
 * Add better examples to the readme 
 * pass foodcritic
 	
-### v0.0.6
+### v0.0.6 (Jun 04, 2012)
 
 * MINITEST-HANDLER-COOKBOOK-12 ensure minitest gem used and not the standard library in 1.9
 * MINITEST-HANDLER-COOKBOOK-11 Add support for Chef-Solo
 * Create the /var/chef/minitest directory if it doesn't already exist
 
 
-### v0.0.5 
+### v0.0.5 (Apr 13, 2012)
 
 * Install the minitest-chef-handler gem instead of downloading from github directly
 * Remove tests from cookbooks no longer in the run list
 
-### v0.0.4
+### v0.0.4 (Apr 02, 2012)
 
 Add examples/ top level directory (may not work)
