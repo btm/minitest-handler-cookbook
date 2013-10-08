@@ -1,0 +1,16 @@
+{
+  "sources": {
+    "minitest-handler": {
+      "path": "."
+    },
+    "minitest-handler_test1": {
+      "path": "./test/cookbooks/minitest-handler_test1"
+    },
+    "minitest-handler_test2": {
+      "path": "./test/cookbooks/minitest-handler_test2"
+    },
+    "chef_handler": {
+      "locked_version": "1.0.8"
+    }
+  }
+}
