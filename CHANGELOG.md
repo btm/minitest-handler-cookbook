@@ -1,14 +1,14 @@
 Changelog
 =====
 
-### 1.1.0 (NOT RELEASED)
+### 1.1.0 (Oct 25, 2013)
 
 * [#47](https://github.com/btm/minitest-handler-cookbook/issues/47) -
   Control the version of minitest-chef-handler gem via node attribute
 * [#45](https://github.com/btm/minitest-handler-cookbook/issues/45) -
   Switch test-kitchen from lxc driver to vagrant driver, allowing tests
   to be run on Windows based host (Windows VMs still not supported)
-* Moving long ruby block inoto a helper library to address 
+* Moving long ruby block into a helper library to address 
   [FC014](http://acrmp.github.io/foodcritic/#FC014) 
 
 ### 1.0.0 (Oct 01, 2013)
