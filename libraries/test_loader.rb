@@ -61,7 +61,7 @@ module MinitestHandler
               ckbk_d = Chef::Resource::RemoteDirectory.new("tests-support-#{cookbook_name}-#{recipe_name}", run_context)
               ckbk_d.source test_path
               ckbk_d.cookbook cookbook_name
-              ckbk_d.path ::File.join(scratch_dir, cookbook_name)
+              ckbk_d.path ::File.join(node[:minitest][:scratch_dir], cookbook_name)
               ckbk_d.recursive true
               ckbk_d.ignore_failure true
               ckbk_d.run_action :create

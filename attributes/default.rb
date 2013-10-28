@@ -8,6 +8,8 @@ default[:minitest][:tests] = "**/*_test.rb"
 default[:minitest][:recipes] = []
 default[:minitest][:verbose] = true
 
+default[:minitest][:scratch_dir] = ::File.join(Chef::Config[:file_cache_path], "minitest_scratch")
+
 case node[:os]
 when "windows"
   default[:minitest][:path] = "/var/chef/minitest"

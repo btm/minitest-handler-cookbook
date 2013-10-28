@@ -19,8 +19,6 @@ Gem.clear_paths
 # Ensure minitest gem is utilized
 require "minitest-chef-handler"
 
-scratch_dir = ::File.join(Chef::Config[:file_cache_path], "minitest_scratch")
-
 [:delete, :create].each do |action|
   directory "minitest test location" do
     path node[:minitest][:path]
@@ -31,8 +29,8 @@ scratch_dir = ::File.join(Chef::Config[:file_cache_path], "minitest_scratch")
     action action
   end
   
-  directory scratch_dir do
-    path scratch_dir
+  directory node[:minitest][:scratch_dir] do
+    path node[:minitest][:scratch_dir]
     owner node[:minitest][:owner]
     group node[:minitest][:group]
     mode node[:minitest][:mode]
