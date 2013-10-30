@@ -3,7 +3,7 @@ module MinitestHandler
   module CookbookHelper
     
     # Load necessary tests onto the filesystem
-    def load_tests
+    def load_tests(scratch_dir)
       require 'fileutils'
       
       unless node[:minitest][:recipes].empty?

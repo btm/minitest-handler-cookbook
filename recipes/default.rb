@@ -45,6 +45,6 @@ end
 ruby_block "load tests" do
   block do
     # Leverage the library code to load the test files
-    load_tests()
+    load_tests(scratch_dir)
   end
 end
