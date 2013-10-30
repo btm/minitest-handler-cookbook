@@ -1,4 +1,5 @@
 Cookbook: minitest-handler<br/>
+Author: Reijo Pitkänen <reijop@gmail.com><br/>
 Author: David Petzel <davidpetzel@gmail.com><br/>
 Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
 Author: Bryan McLellan <btm@loftninjas.org><br/>
