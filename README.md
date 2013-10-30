@@ -136,7 +136,7 @@ be used when an official build is released.
 Come release time here is the checklist:
 * Ensure the `metadata.rb` reflects the proper *even* numbered release
 * Ensure there is a *dated* change log entry in `CHANGELOG.md`
-* Ensure a git tag has applied in the format of v#.#.#
+* Ensure a git tag has applied in the format of v#.#.# (git tag -a v#.#.# -m 'v#.#.#')
 * Commit and push including tags (--tags)
 * Share the cookbook to the community site
   `knife cookbook site ^Care minitest-handler Utilities -o ../`
