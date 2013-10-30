@@ -1,6 +1,11 @@
 Changelog
 =====
 
+### 1.1.2 (Oct 29, 2013)
+
+* [#55](https://github.com/btm/minitest-handler-cookbook/pull/55) -
+  Fix regression in 1.1.0 which was causing `undefined method `scratch_dir'`
+
 ### 1.1.0 (Oct 25, 2013)
 
 * [#47](https://github.com/btm/minitest-handler-cookbook/issues/47) -

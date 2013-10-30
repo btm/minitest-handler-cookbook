@@ -127,3 +127,17 @@ are in this cookbook, see the [chef-rvm](https://github.com/fnichol/chef-rvm),
 **NOTE** A known limitation of using BATS is that the cookbook is not currently
 tested on Windows machines. See https://github.com/btm/minitest-handler-cookbook/issues/45
 for more of the background on this.
+
+### Releasing
+This cookbook uses an 'even number' release strategy. The version number in master
+will always be an odd number indicating development, and an even number will
+be used when an official build is released.
+
+Come release time here is the checklist:
+* Ensure the `metadata.rb` reflects the proper *even* numbered release
+* Ensure there is a *dated* change log entry in `CHANGELOG.md`
+* Ensure a git tag has applied in the format of v#.#.#
+* Commit and push including tags (--tags)
+* Share the cookbook to the community site
+  `knife cookbook site ^Care minitest-handler Utilities -o ../`
+* Bump the version in metadata.rb to the next *patch level* odd number
