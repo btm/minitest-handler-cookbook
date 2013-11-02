@@ -6,7 +6,7 @@ driver_config:
   region_id: <%= ENV['DIGITALOCEAN_REGION_ID'] %>
   ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
   ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY'] %>
-  flavor_id: 64
+  flavor_id: 66
 
 platforms:
 - name: chef-11_ubuntu-12.04
