@@ -17,7 +17,7 @@ platforms:
 suites:
 - name: default
   run_list:
-    - recipe[minitest-handler
+    - recipe[minitest-handler]
     - recipe[minitest-handler_test1]
     - recipe[minitest-handler_test1::not_default]
 
