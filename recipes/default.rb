@@ -13,6 +13,14 @@ end.run_action(:install)
 chef_gem "minitest-chef-handler" do
   version node[:minitest][:chef_handler_gem_version]
   action :nothing
+  # I won't pretend I understand WHY this works, but since the release of
+  # Chef 11.8, this was causing errors related to the PUMA Gem
+  # http://lists.opscode.com/sympa/arc/chef/2013-10/msg00592.html
+  # I tried using the conservative flag, as well as a few other hacks
+  # but for whatever reason, simply retrying once works. The initial
+  # attempt still fails with the error in that thread, however
+  # the retry succeeds...
+  retries 1
 end.run_action(:install)
 
 Gem.clear_paths
