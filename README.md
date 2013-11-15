@@ -1,15 +1,14 @@
-Cookbook: minitest-handler<br/>
-Author: Reijo Pitkänen <reijop@gmail.com><br/>
-Author: David Petzel <davidpetzel@gmail.com><br/>
-Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
-Author: Bryan McLellan <btm@loftninjas.org><br/>
+# minitest-handler cookbook 
+
+[![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)
+
+License: Apache 2.0 <br />
 Copyright: 2012 Opscode, Inc.<br/>
-License: Apache 2.0<br/>
+Author: Bryan McLellan <btm@loftninjas.org><br/>
+Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
 
-Description
-===========
 
-# <a name="title"></a> minitest-handler [![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)
+## Description
 
 This cookbook utilizes the minitest-chef-handler project to facilitate
 cookbook testing. By default, minitest-handler will collect all the
@@ -29,8 +28,7 @@ test files named "<recipe-name>_test.rb" rather than all test files in the path 
 
 If you have any helper libraries, they should match `files/default/test/*helper*.rb`
 
-Attributes
-==========
+## Attributes
 * `node[:minitest][:gem_version]` - The version of the [minitest](http://rubygems.org/gems/minitest)
   gem to install and use. 
   * Default: 3.0.1
@@ -58,9 +56,7 @@ Attributes
 * `node[:minitest][:verbose]` - Display verbose output
   * Default: true
 
-Usage
-=====
-
+## Usage
 * Add ``recipe[minitest-handler]`` somewhere on your run_list, preferably last
 * Place tests in ``files/default/test/`` with the name **your-recipe-name\_test.rb**
   (default recipe is named **default_test.rb**)
@@ -70,9 +66,7 @@ Usage
 
 [Minitest](https://github.com/seattlerb/minitest)
 
-Examples
-========
-
+## Examples
 ### Traditional minitest
 
     class TestApache2 < MiniTest::Chef::TestCase
@@ -113,7 +107,7 @@ Examples
 For more detailed examples, see [here](https://github.com/calavera/minitest-chef-handler/blob/v0.4.0/examples/spec_examples/files/default/tests/minitest/example_test.rb)
 
 
-### Testing this cookbook
+## Testing this cookbook
 
 This cookbook currently uses [test-kitchen](https://github.com/opscode/test-kitchen)
 along with the [kitchen-vagrant](https://github.com/opscode/kitchen-vagrant).
@@ -129,7 +123,7 @@ are in this cookbook, see the [chef-rvm](https://github.com/fnichol/chef-rvm),
 tested on Windows machines. See https://github.com/btm/minitest-handler-cookbook/issues/45
 for more of the background on this.
 
-### Releasing
+## Releasing
 This cookbook uses an 'even number' release strategy. The version number in master
 will always be an odd number indicating development, and an even number will
 be used when an official build is released.
@@ -143,3 +137,8 @@ Come release time here is the checklist:
 * Share the cookbook to the community site
   `knife cookbook site share minitest-handler Utilities -o ../`
 * Bump the version in metadata.rb to the next *patch level* odd number
+
+## Contributors
+* David Petzel <davidpetzel@gmail.com>
+* Reijo Pitkänen <reijop@gmail.com>
+* Jean Mertz <jean@mertz.fm>

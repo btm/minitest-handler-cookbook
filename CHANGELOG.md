@@ -1,10 +1,15 @@
 Changelog
 =====
 
+### 1.1.4 (Nov 14, 2013)
+* Apply workaround for for [build tools issues](http://lists.opscode.com/sympa/arc/chef/2013-11/msg00011.html)
+* [#57](https://github.com/btm/minitest-handler-cookbook/pull/57) -
+  Fix for [CHEF-3694](https://tickets.opscode.com/browse/CHEF-3694)
+
 ### 1.1.2 (Oct 29, 2013)
 
 * [#55](https://github.com/btm/minitest-handler-cookbook/pull/55) -
-  Fix regression in 1.1.0 which was causing `undefined method `scratch_dir'`
+  Fix regression in 1.1.0 which was causing `undefined method 'scratch_dir'`
 
 ### 1.1.0 (Oct 25, 2013)
 
