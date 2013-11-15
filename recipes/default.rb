@@ -30,7 +30,7 @@ require "minitest-chef-handler"
 scratch_dir = ::File.join(Chef::Config[:file_cache_path], "minitest_scratch")
 
 [:delete, :create].each do |action|
-  directory "minitest test location" do
+  directory "#{action} minitest test location" do
     path node[:minitest][:path]
     owner node[:minitest][:owner]
     group node[:minitest][:group]
@@ -39,7 +39,7 @@ scratch_dir = ::File.join(Chef::Config[:file_cache_path], "minitest_scratch")
     action action
   end
   
-  directory scratch_dir do
+  directory "#{action} #{scratch_dir}" do
     path scratch_dir
     owner node[:minitest][:owner]
     group node[:minitest][:group]
