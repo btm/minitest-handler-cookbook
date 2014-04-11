@@ -1,5 +1,4 @@
 module Helpers
-
   # For each cookbook, rename module to MyCookbookName in this file, and in _test.rb files
   module MinitestHandler
     include MiniTest::Chef::Assertions
@@ -7,6 +6,5 @@ module Helpers
     include MiniTest::Chef::Resources
 
   # Write helper functions here
-
   end
 end

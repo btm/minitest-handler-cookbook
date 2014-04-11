@@ -9,7 +9,7 @@ describe 'minitest-handler::default' do
   include Helpers::MinitestHandler
 
   # For test examples, see:
-  # https://github.com/calavera/minitest-chef-handler/blob/master/examples/spec_examples/files/default/tests/minitest/example_test.rb  
+  # https://github.com/calavera/minitest-chef-handler/blob/master/examples/spec_examples/files/default/tests/minitest/example_test.rb
   it 'runs no tests' do
   end
 

@@ -1,9 +1,9 @@
-name             "minitest-handler"
-maintainer       "David Petzel"
-maintainer_email "davidpetzel@gmail.com"
-license          "Apache 2.0"
-description      "Installs and configures minitest-chef-handler"
+name 'minitest-handler'
+maintainer 'David Petzel'
+maintainer_email 'davidpetzel@gmail.com'
+license 'Apache 2.0'
+description 'Installs and configures minitest-chef-handler'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.1.5"
+version '1.1.5'
 
-depends "chef_handler"
+depends 'chef_handler'

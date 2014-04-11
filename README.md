@@ -44,7 +44,7 @@ If you have any helper libraries, they should match `files/default/test/*helper*
   * Default: []
 * `node[:minitest][:filter]` - Filter test names on a pattern (regex)
   * Default: `nil`
-  * Example: `/apache2/` could be used to *only* run tests for recipes with
+  * Example: `/apache2/` could be used to *only* run tests for recipes
     starting with *apache2*
 * `node[:minitest][:seed]` - Set random seed
   * Default: `nil`

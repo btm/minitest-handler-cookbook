@@ -1,41 +1,40 @@
 
 module MinitestHandler
   module CookbookHelper
-    
     # Load necessary tests onto the filesystem
     def load_tests(scratch_dir)
       require 'fileutils'
-      
+
       unless node[:minitest][:recipes].empty?
         recipes = node[:minitest][:recipes].dup
       else
-        if Chef::VERSION < "11.0"
+        if Chef::VERSION < '11.0'
           seen_recipes = node.run_state[:seen_recipes]
           recipes = seen_recipes.keys.each { |i| i }
         else
           recipes = run_context.loaded_recipes
         end
         if recipes.empty? and Chef::Config[:solo]
-          #If you have roles listed in your run list they are NOT expanded
-          recipes = node.run_list.map {|item| item.name if item.type == :recipe }
+          # If you have roles listed in your run list they are NOT expanded
+          recipes = node.run_list.map { |item| item.name if item.type == :recipe }
         end
       end
-  
+
       recipes.each do |recipe|
         # recipes is actually a list of cookbooks and recipes with :: as a
         # delimiter
-        unless recipe.include?("::")
+        unless recipe.include?('::')
           cookbook_name = recipe
-          recipe_name = "default"
+          recipe_name = 'default'
         else
-          cookbook_name,recipe_name = recipe.split('::')
+          cookbook_name, recipe_name = recipe.split('::')
         end
-  
+
         # create the parent directory
         dir = Chef::Resource::Directory.new("#{node[:minitest][:path]}/#{cookbook_name}", run_context)
         dir.recursive(true)
         dir.run_action :create
-        
+
         # https://github.com/btm/minitest-handler-cookbook/issues/42
         # Ensure we download cookbooks from Chef Server so the rest
         # of this code works. It would appear that if the file is not
@@ -49,14 +48,14 @@ module MinitestHandler
         unless Chef::Config[:solo]
           ckbk = run_context.cookbook_collection[cookbook_name]
           # Support both old and new locations
-          old_path = "tests/minitest"
-          new_path = "test"
-          
+          old_path = 'tests/minitest'
+          new_path = 'test'
+
           [old_path, new_path].each do |test_path|
             begin
               # This will raise at compile-time if we can't find the directory
               ckbk.preferred_manifest_records_for_directory(node, 'files', test_path)
-  
+
               # copy the test files
               ckbk_d = Chef::Resource::RemoteDirectory.new("tests-support-#{cookbook_name}-#{recipe_name}", run_context)
               ckbk_d.source test_path
@@ -70,14 +69,14 @@ module MinitestHandler
             end
           end
         end
-        
+
         tests = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
           ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/test*/**/#{recipe_name}_test.rb"]
         end.flatten(1)
         unless tests.empty?
           FileUtils.cp tests, "#{node[:minitest][:path]}/#{cookbook_name}/"
         end
-  
+
         support_files = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
           ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/test*/**/*helper*.rb"]
         end.flatten(1)
@@ -97,14 +96,14 @@ module MinitestHandler
           # to the user ignore the actual disk location and just
           # show them what cookbook it is.
           Array(Chef::Config[:cookbook_path]).each do |cookbook_path|
-            wdf.gsub!("#{cookbook_path}/#{cookbook_name}/", '') 
+            wdf.gsub!("#{cookbook_path}/#{cookbook_name}/", '')
           end
           ::Chef::Log.warn("A test file was detected at #{wdf} in the #{cookbook_name} cookbook." \
             ' As of version 1.2.0 of the minitest-handler-cookbook storing files' \
             ' in this location is not supported. If you would like these tests executed' \
             ' you should move them into files/default/test/')
         end
-        
+
         unless support_files.empty?
           # do this in a loop to preserve directory structure
           # for backwards compatibility for dumb idea of putting support files in support/
@@ -122,20 +121,20 @@ module MinitestHandler
           end
         end
       end
-  
+
       options = {
-        :path => "#{node[:minitest][:path]}/#{node[:minitest][:tests]}",
-        :verbose => node[:minitest][:verbose]}
+        path: "#{node[:minitest][:path]}/#{node[:minitest][:tests]}",
+        verbose: node[:minitest][:verbose] }
       # The following options can be omited
       options[:filter]     = node[:minitest][:filter] if node[:minitest].include? 'filter'
       options[:seed]       = node[:minitest][:seed] if node[:minitest].include? 'seed'
       options[:ci_reports] = node[:minitest][:ci_reports] if node[:minitest].include? 'ci_reports'
-  
+
       handler = MiniTest::Chef::Handler.new(options)
-  
-      Chef::Log.info("Enabling minitest-chef-handler as a report handler")
-      Chef::Config.send("report_handlers").delete_if {|v| v.class.to_s.include? MiniTest::Chef::Handler.to_s}
-      Chef::Config.send("report_handlers") << handler
+
+      Chef::Log.info('Enabling minitest-chef-handler as a report handler')
+      Chef::Config.send('report_handlers').delete_if { |v| v.class.to_s.include? MiniTest::Chef::Handler.to_s }
+      Chef::Config.send('report_handlers') << handler
     end
   end
 end
