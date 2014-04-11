@@ -1,6 +1,13 @@
 Changelog
 =====
 
+### 1.2.0 UNRELEASED
+* Fixed bug where a test file saved in `files/default` (instead of one of the documented)
+  paths would get processed. If you were previously relying on this unintended
+  behaviour you will need to move your test files into `files/default/test/`.
+  A warning will be logged if any of these files are found to help you identify
+  if this change affects use
+
 ### 1.1.4 (Nov 14, 2013)
 * Apply workaround for for [build tools issues](http://lists.opscode.com/sympa/arc/chef/2013-11/msg00011.html)
 * [#57](https://github.com/btm/minitest-handler-cookbook/pull/57) -

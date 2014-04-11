@@ -1,7 +1,15 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
-gem 'thor-foodcritic'
-gem 'test-kitchen', '>= 1.0.0.alpha.3', :group => :integration
-gem 'kitchen-lxc', path: '~/pr/kitchen-lxc' # :group => :integration
-gem 'rake', :group => :integration
+gem 'chefspec',   '~> 3.2'
+gem 'rubocop'
+gem 'foodcritic', '~>3.0.3'
+
+group :integration do
+  gem 'rake'
+  gem 'test-kitchen',    '~> 1.1'
+  gem 'kitchen-vagrant', '~> 0.14'
+  gem 'kitchen-digitalocean'
+  gem 'kitchen-docker'
+  gem 'busser-bats'
+end

@@ -1,18 +1,50 @@
+<%
+  provisioner = ENV['KITCHEN_PROVISIONER'] || 'chef_zero'
+  omnibus_version = ENV['KITCHEN_OMNIBUS_VER'] || 'true'
+  driver = ENV['KITCHEN_DRIVER'] || 'vagrant'
+%>
+
 ---
-driver_plugin: vagrant
+driver:
+  name: <%= driver %>
+
+<% if driver == 'digitalocean' %>
 driver_config:
-  require_chef_omnibus: true
+  digitalocean_client_id: <%= ENV['DIGITALOCEAN_CLIENT_ID'] %>
+  digitalocean_api_key: <%= ENV['DIGITALOCEAN_API_KEY'] %>
+  region_id: <%= ENV['DIGITALOCEAN_REGION_ID'] || '1' %>
+  ssh_key_ids: <%= ENV['DIGITALOCEAN_SSH_KEY_IDS'] %>
+  ssh_key: <%= ENV['DIGITALOCEAN_SSH_KEY'] %>
+  flavor_id: 66
+<% end %>
+
+provisioner:
+  name: <%= provisioner %>
+  require_chef_omnibus: <%= omnibus_version %>
 
 platforms:
 - name: ubuntu-12.04
   driver_config:
+  <% if driver == 'vagrant' %>
     box: opscode-ubuntu-12.04
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
+  <% elsif driver == 'digitalocean' %>
+    image_id: 284203
+  <% elsif driver == 'docker' %>
+    image: ubuntu:12.04
+  <% end %>
+
     
 - name: centos-6.4
   driver_config:
+  <% if driver == 'vagrant' %>
     box: opscode-centos-6.4
     box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
+  <% elsif driver == 'digitalocean' %>
+    image_id: 562354
+  <% elsif driver == 'docker' %>
+    image: centos:6.4
+  <% end %>
 
 suites:
 - name: default
@@ -20,6 +52,7 @@ suites:
     - recipe[minitest-handler]
     - recipe[minitest-handler_test1]
     - recipe[minitest-handler_test1::not_default]
+    - recipe[minitest-handler_test1::wrong_dir]
 
 - name: legacy_paths
   run_list:
