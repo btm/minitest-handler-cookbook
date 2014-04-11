@@ -72,15 +72,38 @@ module MinitestHandler
         end
         
         tests = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
-          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/**/#{recipe_name}_test.rb"]
+          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/test*/**/#{recipe_name}_test.rb"]
         end.flatten(1)
         unless tests.empty?
           FileUtils.cp tests, "#{node[:minitest][:path]}/#{cookbook_name}/"
         end
   
         support_files = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
-          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/**/*helper*.rb"]
+          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/test*/**/*helper*.rb"]
         end.flatten(1)
+
+        # As of version 1.2.0 a fix was implemented that would no longer copy files
+        # that were in the wrong directory. Its possible this change might affect
+        # users so let them know
+        tests_in_wrong_dir = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
+          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/#{recipe_name}_test.rb"]
+        end.flatten(1)
+        support_files_in_wrong_dir = Array(Chef::Config[:cookbook_path]).map do |cookbook_path|
+          ::Dir["#{cookbook_path}/#{cookbook_name}/files/default/*helper*.rb"]
+        end.flatten(1)
+        wrong_dir_files = tests_in_wrong_dir + support_files_in_wrong_dir
+        wrong_dir_files.each do |wdf|
+          # Cleanup for readibility only. When displaying the message
+          # to the user ignore the actual disk location and just
+          # show them what cookbook it is.
+          Array(Chef::Config[:cookbook_path]).each do |cookbook_path|
+            wdf.gsub!("#{cookbook_path}/#{cookbook_name}/", '') 
+          end
+          ::Chef::Log.warn("A test file was detected at #{wdf} in the #{cookbook_name} cookbook." \
+            ' As of version 1.2.0 of the minitest-handler-cookbook storing files' \
+            ' in this location is not supported. If you would like these tests executed' \
+            ' you should move them into files/default/test/')
+        end
         
         unless support_files.empty?
           # do this in a loop to preserve directory structure
