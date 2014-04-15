@@ -31,7 +31,6 @@ module MinitestHandler
         dir.recursive(true)
         dir.run_action(:create)
 
-
         support_files(cookbook_name).each do |support_file|
           copy_file(cookbook_name, support_file)
         end
