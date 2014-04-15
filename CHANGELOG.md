@@ -7,6 +7,16 @@ Changelog
   behaviour you will need to move your test files into `files/default/test/`.
   A warning will be logged if any of these files are found to help you identify
   if this change affects use
+* Efficiency Improvement. Previously all test files for a given cookbook would be downloaded
+  to a temp directory regardless of if they were needed or not. Now only test files that
+  are actually needed will be downloaded
+* [#58](https://github.com/btm/minitest-handler-cookbook/issues/58) -
+  Expand use of `node[:minitest][:filter]`. Previously the filter would be
+  applied to the execution of minitest, however files not matching the filter could
+  still be downloaded but not executed. Now *test file names* not matching the filter
+  won't be downloaded at all.
+* Rubocop cleanup
+
 
 ### 1.1.4 (Nov 14, 2013)
 * Apply workaround for for [build tools issues](http://lists.opscode.com/sympa/arc/chef/2013-11/msg00011.html)

@@ -11,7 +11,7 @@ desc 'Run tests'
 task :test do
   Rake::Task[:foodcritic].execute
   Rake::Task[:rubocop].execute
-  Rake::Task[:rspec].execute
+  # Rake::Task[:rspec].execute
 end
 
 desc "Runs foodcritic linter"
@@ -45,6 +45,7 @@ task :rubocop do
   end
 end
 
+=begin
 desc 'Perform rspec tests'
 task :rspec do
   spec_runner = RSpec::Core::Runner.run(FileList['spec/**/*_spec.rb'])
@@ -55,6 +56,7 @@ task :rspec do
     puts 'All spec tests passed'
   end
 end
+=end
 
 
 

@@ -67,3 +67,13 @@ suites:
     - recipe[minitest-handler]
     - recipe[minitest-handler_test2]
 
+# This suite is used to excercise that when a filter
+# is set it used properly
+- name: filter_applied
+  run_list:
+    - recipe[minitest-handler]
+    - recipe[minitest-handler_test1]
+    - recipe[minitest-handler_test2]
+  attributes:
+    minitest:
+      filter: /minitest-handler_test1/

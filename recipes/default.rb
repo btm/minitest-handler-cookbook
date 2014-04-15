@@ -1,6 +1,4 @@
-class Chef::Resource::RubyBlock
-  include MinitestHandler::CookbookHelper
-end
+::Chef::Resource::RubyBlock.send(:include, MinitestHandler::CookbookHelper)
 
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
 chef_gem 'minitest' do
@@ -26,8 +24,6 @@ Gem.clear_paths
 # Ensure minitest gem is utilized
 require 'minitest-chef-handler'
 
-scratch_dir = ::File.join(Chef::Config[:file_cache_path], 'minitest_scratch')
-
 [:delete, :create].each do |action|
   directory "#{action} minitest test location" do
     path node[:minitest][:path]
@@ -37,21 +33,12 @@ scratch_dir = ::File.join(Chef::Config[:file_cache_path], 'minitest_scratch')
     recursive true
     action action
   end
-
-  directory "#{action} #{scratch_dir}" do
-    path scratch_dir
-    owner node[:minitest][:owner]
-    group node[:minitest][:group]
-    mode node[:minitest][:mode]
-    recursive true
-    action action
-  end
 end
 
 # Search through all cookbooks in the run list for tests
-ruby_block 'load tests' do
+ruby_block 'load_tests_and_register_handler' do
   block do
-    # Leverage the library code to load the test files
-    load_tests(scratch_dir)
+    load_tests
+    register_handler
   end
 end

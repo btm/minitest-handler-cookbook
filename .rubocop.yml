@@ -1,2 +1,6 @@
 Encoding:
   Enabled: false
+LineLength:
+  Max: 100
+MethodLength:
+  Max: 30

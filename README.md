@@ -140,5 +140,5 @@ Come release time here is the checklist:
 
 ## Contributors
 * David Petzel <davidpetzel@gmail.com>
-* Reijo Pitkänen <reijop@gmail.com>
+* Reijo Pitkanen <reijop@gmail.com>
 * Jean Mertz <jean@mertz.fm>
