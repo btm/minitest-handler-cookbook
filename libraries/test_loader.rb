@@ -18,23 +18,25 @@ module MinitestHandler
         end
         seen_cookbooks << cookbook_name unless seen_cookbooks.include?(cookbook_name)
 
+        unless matches_filter?(recipe_name, cookbook_name)
+          ::Chef::Log.debug('Not copying test files for recipe' \
+            " #{recipe_name} in cookbook #{cookbook_name} as it" \
+            " does not match filter #{node[:minitest][:filter]}")
+          next
+        end
+
         # create the parent directory
         dir = Chef::Resource::Directory.new(
           "#{node[:minitest][:path]}/#{cookbook_name}", run_context)
         dir.recursive(true)
         dir.run_action(:create)
 
+
         support_files(cookbook_name).each do |support_file|
           copy_file(cookbook_name, support_file)
         end
         test_files(cookbook_name, recipe_name).each do |test_file|
-          if matches_filter?(recipe_name, cookbook_name)
-            copy_file(cookbook_name, test_file)
-          else
-            ::Chef::Log.debug('Not copying test files for recipe' \
-              " #{recipe_name} in cookbook #{cookbook_name} as it" \
-              " does not match filter #{node[:minitest][:filter]}")
-          end
+          copy_file(cookbook_name, test_file)
         end
       end
 
