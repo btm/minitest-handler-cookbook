@@ -3,4 +3,4 @@ Encoding:
 LineLength:
   Max: 100
 MethodLength:
-  Max: 30
+  Max: 40
