@@ -2,11 +2,11 @@ Changelog
 =====
 
 ### 1.2.0 UNRELEASED
-* Fixed bug where a test file saved in `files/default` (instead of one of the documented)
-  paths would get processed. If you were previously relying on this unintended
+* Fixed bug where a test file saved in `files/default` (instead of one of the documented
+  paths) would get processed. If you were previously relying on this unintended
   behaviour you will need to move your test files into `files/default/test/`.
   A warning will be logged if any of these files are found to help you identify
-  if this change affects use
+  if this change affects you.
 * Efficiency Improvement. Previously all test files for a given cookbook would be downloaded
   to a temp directory regardless of if they were needed or not. Now only test files that
   are actually needed will be downloaded
