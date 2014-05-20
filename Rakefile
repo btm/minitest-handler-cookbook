@@ -14,9 +14,9 @@ task :test do
   # Rake::Task[:rspec].execute
 end
 
-desc "Runs foodcritic linter"
+desc 'Runs foodcritic linter'
 task :foodcritic do
-  if Gem::Version.new("1.9.2") <= Gem::Version.new(RUBY_VERSION.dup)
+  if Gem::Version.new('1.9.2') <= Gem::Version.new(RUBY_VERSION.dup)
 
     puts 'Running foodcritic checks'
     review = ::FoodCritic::Linter.new.check(
@@ -45,20 +45,16 @@ task :rubocop do
   end
 end
 
-=begin
-desc 'Perform rspec tests'
-task :rspec do
-  spec_runner = RSpec::Core::Runner.run(FileList['spec/**/*_spec.rb'])
-  if spec_runner > 0
-    puts 'Spec failures detected'
-    exit spec_runner
-  else
-    puts 'All spec tests passed'
-  end
-end
-=end
-
-
+# desc 'Perform rspec tests'
+# task :rspec do
+#  spec_runner = RSpec::Core::Runner.run(FileList['spec/**/*_spec.rb'])
+#  if spec_runner > 0
+#    puts 'Spec failures detected'
+#    exit spec_runner
+#  else
+#    puts 'All spec tests passed'
+#  end
+# end
 
 require 'kitchen'
 desc 'Run Test Kitchen integration tests'
