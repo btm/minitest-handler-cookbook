@@ -1,7 +1,7 @@
 Changelog
 =====
 
-### 1.2.0 UNRELEASED
+### 1.2.0 (Apr 23, 2014)
 * Fixed bug where a test file saved in `files/default` (instead of one of the documented
   paths) would get processed. If you were previously relying on this unintended
   behaviour you will need to move your test files into `files/default/test/`.
