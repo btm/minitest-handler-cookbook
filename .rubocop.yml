@@ -4,3 +4,5 @@ LineLength:
   Max: 100
 MethodLength:
   Max: 40
+HashSyntax:
+  Enabled: false

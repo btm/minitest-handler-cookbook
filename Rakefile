@@ -64,4 +64,3 @@ task :integration do
     instance.test(:always)
   end
 end
-
