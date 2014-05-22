@@ -6,6 +6,6 @@ module Helpers
     include MiniTest::Chef::Context
     include MiniTest::Chef::Resources
 
-  # Write helper functions here
+    # Write helper functions here
   end
 end

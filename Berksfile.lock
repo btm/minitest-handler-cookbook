@@ -1,16 +1,20 @@
-{
-  "sources": {
-    "minitest-handler": {
-      "path": "."
-    },
-    "minitest-handler_test1": {
-      "path": "./test/cookbooks/minitest-handler_test1"
-    },
-    "minitest-handler_test2": {
-      "path": "./test/cookbooks/minitest-handler_test2"
-    },
-    "chef_handler": {
-      "locked_version": "1.0.8"
-    }
-  }
-}
+DEPENDENCIES
+  chef_handler
+  minitest-handler
+    path: .
+    metadata: true
+  minitest-handler_test1
+    path: test/cookbooks/minitest-handler_test1
+  minitest-handler_test2
+    path: test/cookbooks/minitest-handler_test2
+
+GRAPH
+  chef_handler (1.1.6)
+  minitest-handler (1.2.1)
+    chef_handler (>= 0.0.0)
+  minitest-handler_test1 (0.0.1)
+    chef_handler (>= 0.0.0)
+    minitest-handler (>= 0.0.0)
+  minitest-handler_test2 (0.0.1)
+    chef_handler (>= 0.0.0)
+    minitest-handler (>= 0.0.0)
