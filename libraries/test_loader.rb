@@ -222,7 +222,8 @@ module MinitestHandler
         # when the cookbook_file resource goes to place the file
         relative_file_name = cb_file.dup
         Array(Chef::Config[:cookbook_path]).each do |cb_path|
-          dir_prefix = Regexp.new '[A-Za-z]?:?' + ::File.join(cb_path, cookbook_name, 'files', 'default', '/')
+          dir_prefix = Regexp.new('[A-Za-z]?:?' +
+            ::File.join(cb_path, cookbook_name, 'files', 'default', '/'))
           relative_file_name.gsub!(dir_prefix, '')
         end
         relative_file_names << relative_file_name
