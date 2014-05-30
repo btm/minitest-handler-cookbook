@@ -1,6 +1,13 @@
 Changelog
 =====
 
+### 1.2.2 (UNRELEASED)
+* [#62](https://github.com/btm/minitest-handler-cookbook/issues/62) -
+  Increase default version of `chef_handler_gem` from 1.0.1 to 1.0.2. If for some reason
+  you wish to avoid 1.0.2 ensure you set a value of 1.0.1 for `node[:minitest][:chef_handler_gem_version]`
+* [#61](https://github.com/btm/minitest-handler-cookbook/pull/61) -
+  Fix bug where Windows drive letters would cause errors when fetching cookbook files
+
 ### 1.2.0 (Apr 23, 2014)
 * Fixed bug where a test file saved in `files/default` (instead of one of the documented
   paths) would get processed. If you were previously relying on this unintended
