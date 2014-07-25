@@ -1,4 +1,4 @@
-# minitest-handler cookbook 
+# minitest-handler cookbook
 
 [![Build Status](https://secure.travis-ci.org/btm/minitest-handler-cookbook.png?branch=master)](http://travis-ci.org/btm/minitest-handler-cookbook)
 
@@ -12,7 +12,7 @@ Author: Bryan W. Berry <bryan.berry@gmail.com><br/>
 
 This cookbook utilizes the minitest-chef-handler project to facilitate
 cookbook testing. By default, minitest-handler will collect all the
-tests in your cookbook_path and run them. 
+tests in your cookbook_path and run them.
 
 minitest-chef-handler project: https://github.com/calavera/minitest-chef-handler<br/>
 stable minitest-handler cookbook: http://community.opscode.com/cookbooks/minitest-handler<br/>
@@ -30,18 +30,18 @@ If you have any helper libraries, they should match `files/default/test/*helper*
 
 ## Attributes
 * `node[:minitest][:gem_version]` - The version of the [minitest](http://rubygems.org/gems/minitest)
-  gem to install and use. 
+  gem to install and use.
   * Default: 3.0.1
 * `node[:minitest][:chef_handler_gem_version]` - The version of the [minitest-chef-handler](http://rubygems.org/gems/minitest-chef-handler)
-  gem to install and use. 
-  * Default: 1.0.1
+  gem to install and use.
+  * Default: 1.0.3
 * `node[:minitest][:ci_reporter_gem_version]` - The version of the [ci_reporter](http://rubygems.org/gems/ci_reporter)
   gem to install and use.
   * Default: 1.9.2
-* `node[:minitest][:path]` - Location to store and find test files. 
+* `node[:minitest][:path]` - Location to store and find test files.
   * Default: `/var/chef/minitest`
-* `node[:minitest][:recipes]` - The names of all recipes included during the 
-  chef run, whether by insertion to the run_list, inclusion through a role, or 
+* `node[:minitest][:recipes]` - The names of all recipes included during the
+  chef run, whether by insertion to the run_list, inclusion through a role, or
   added with `include_recipe`. If you only want tests for select recipes to run,
   override this value with the names of the recipes that you want tested.
   * Default: []
@@ -115,11 +115,11 @@ For more detailed examples, see [here](https://github.com/calavera/minitest-chef
 This cookbook currently uses [test-kitchen](https://github.com/opscode/test-kitchen)
 along with the [kitchen-vagrant](https://github.com/opscode/kitchen-vagrant).
 
-All test are currently written using [BATS](https://github.com/sstephenson/bats), 
+All test are currently written using [BATS](https://github.com/sstephenson/bats),
 which is essentially bash. Using BATS was done so that minitest-handler nor
-minitest-chef-handler were used to test itself. For more examples of bats than 
-are in this cookbook, see the [chef-rvm](https://github.com/fnichol/chef-rvm), 
-[chef-ruby_build](https://github.com/fnichol/chef-ruby_build), and 
+minitest-chef-handler were used to test itself. For more examples of bats than
+are in this cookbook, see the [chef-rvm](https://github.com/fnichol/chef-rvm),
+[chef-ruby_build](https://github.com/fnichol/chef-ruby_build), and
 [chef-rbenv](https://github.com/fnichol/chef-rbenv) cookbooks.
 
 **NOTE** A known limitation of using BATS is that the cookbook is not currently
