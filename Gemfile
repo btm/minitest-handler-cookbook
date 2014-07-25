@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'berkshelf'
 gem 'chefspec',   '~> 3.2'
-gem 'rubocop'
+gem 'rubocop', '< 0.23.0'
 gem 'foodcritic', '~>3.0.3'
 
 group :integration do
