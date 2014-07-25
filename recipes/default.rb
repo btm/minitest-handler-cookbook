@@ -1,5 +1,10 @@
 ::Chef::Resource::RubyBlock.send(:include, MinitestHandler::CookbookHelper)
 
+chef_gem 'ci_reporter' do
+  version node[:minitest][:ci_reporter_gem_version]
+  action :nothing
+end.run_action(:install)
+
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
 chef_gem 'minitest' do
   version node[:minitest][:gem_version]

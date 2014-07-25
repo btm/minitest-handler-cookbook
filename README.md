@@ -35,6 +35,9 @@ If you have any helper libraries, they should match `files/default/test/*helper*
 * `node[:minitest][:chef_handler_gem_version]` - The version of the [minitest-chef-handler](http://rubygems.org/gems/minitest-chef-handler)
   gem to install and use. 
   * Default: 1.0.1
+* `node[:minitest][:ci_reporter_gem_version]` - The version of the [ci_reporter](http://rubygems.org/gems/ci_reporter)
+  gem to install and use.
+  * Default: 1.9.2
 * `node[:minitest][:path]` - Location to store and find test files. 
   * Default: `/var/chef/minitest`
 * `node[:minitest][:recipes]` - The names of all recipes included during the 
