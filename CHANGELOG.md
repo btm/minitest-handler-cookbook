@@ -1,12 +1,18 @@
 Changelog
 =====
 
-### 1.2.2 (UNRELEASED)
+### 1.3.0 (Jul 25, 2014)
 * [#62](https://github.com/btm/minitest-handler-cookbook/issues/62) -
-  Increase default version of `chef_handler_gem` from 1.0.1 to 1.0.2. If for some reason
-  you wish to avoid 1.0.2 ensure you set a value of 1.0.1 for `node[:minitest][:chef_handler_gem_version]`
+  Increase default version of `chef_handler_gem` from 1.0.1 to 1.0.3. If for some reason
+  you wish to avoid 1.0.3 ensure you set a value of 1.0.1 for `node[:minitest][:chef_handler_gem_version]`
 * [#61](https://github.com/btm/minitest-handler-cookbook/pull/61) -
-  Fix bug where Windows drive letters would cause errors when fetching cookbook files
+  Fix bug where Windows drive letters would cause errors when fetching cookbook files.
+  Thanks [matt-richardson](https://github.com/matt-richardson)!
+* [#63](https://github.com/btm/minitest-handler-cookbook/pull/63) -
+  The `ci_reporter` gem version can now be controlled via the node attribute
+  `node[:minitest][:ci_reporter_gem_version]`, with a default of `1.9.2`.
+  Thanks [jwitrick](https://github.com/jwitrick)!
+* Upgraded versions of Chefspec, Foodcritic, and Rubocop
 
 ### 1.2.0 (Apr 23, 2014)
 * Fixed bug where a test file saved in `files/default` (instead of one of the documented
@@ -42,8 +48,8 @@ Changelog
 * [#45](https://github.com/btm/minitest-handler-cookbook/issues/45) -
   Switch test-kitchen from lxc driver to vagrant driver, allowing tests
   to be run on Windows based host (Windows VMs still not supported)
-* Moving long ruby block into a helper library to address 
-  [FC014](http://acrmp.github.io/foodcritic/#FC014) 
+* Moving long ruby block into a helper library to address
+  [FC014](http://acrmp.github.io/foodcritic/#FC014)
 
 ### 1.0.0 (Oct 01, 2013)
 
@@ -82,12 +88,12 @@ Niceties:
 * add travis-ci integration
 * change maintainer to Bryan W. Berry
 
-	
+
 ### v0.0.7 (Jun 04, 2012)
 
-* Add better examples to the readme 
+* Add better examples to the readme
 * pass foodcritic
-	
+
 ### v0.0.6 (Jun 04, 2012)
 
 * MINITEST-HANDLER-COOKBOOK-12 ensure minitest gem used and not the standard library in 1.9
