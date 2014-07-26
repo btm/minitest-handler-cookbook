@@ -1,4 +1,4 @@
-site :opscode
+source 'https://supermarket.getchef.com'
 metadata
 
 cookbook 'minitest-handler_test1', path: 'test/cookbooks/minitest-handler_test1'
