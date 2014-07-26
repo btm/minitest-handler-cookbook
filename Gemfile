@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf'
-gem 'chefspec',   '~> 3.2'
-gem 'rubocop', '< 0.23.0'
-gem 'foodcritic', '~>3.0.3'
+gem 'berkshelf', '~> 3.1'
+gem 'chefspec', '~> 4.0'
+gem 'rubocop', '~> 0.24'
+gem 'foodcritic', '~> 4.0'
 
 group :integration do
   gem 'rake'
