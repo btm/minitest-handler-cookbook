@@ -4,6 +4,7 @@ gem 'berkshelf', '~> 3.1'
 gem 'chefspec', '~> 4.0'
 gem 'rubocop', '~> 0.24'
 gem 'foodcritic', '~> 4.0'
+gem 'stove'
 
 group :integration do
   gem 'rake'
