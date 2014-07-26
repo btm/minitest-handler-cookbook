@@ -21,7 +21,8 @@ task :foodcritic do
     puts 'Running foodcritic checks'
     review = ::FoodCritic::Linter.new.check(
       cookbook_paths: ['./'],
-      search_gems: true
+      search_gems: true,
+      tags: ['~FC001']
     )
     if review.warnings.any?
       puts review
@@ -37,7 +38,7 @@ end
 desc 'Run Rubocop'
 task :rubocop do
   puts 'Running Rubocop Style Checks'
-  result = Rubocop::CLI.new.run([])
+  result = RuboCop::CLI.new.run([])
   if result == 0
     puts 'No Rubocop errors'
   else
