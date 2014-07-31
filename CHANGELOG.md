@@ -1,6 +1,9 @@
 Changelog
 =====
 
+### 1.3.2 (Jul 20, 2014)
+* [#64](https://github.com/btm/minitest-handler-cookbook/issues/62) -
+  Fixed bug where test files were not dected properly detected under `chef-client`
 ### 1.3.0 (Jul 25, 2014)
 * [#62](https://github.com/btm/minitest-handler-cookbook/issues/62) -
   Increase default version of `chef_handler_gem` from 1.0.1 to 1.0.3. If for some reason
