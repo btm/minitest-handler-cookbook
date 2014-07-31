@@ -203,28 +203,43 @@ module MinitestHandler
       remove_nil_from_array(files)
     end
 
+    # Extract the list of *files* (in the files directory)
+    # from a cookbook
+    #
+    # @return [Array] of file paths relative to the cookbook root
+    def cookbook_file_paths(cookbook_name)
+      ckbk = run_context.cookbook_collection[cookbook_name]
+      files = []
+      ckbk.manifest['files'].each do |file_info|
+        files << file_info['path']
+      end
+      files
+    end
+
     # Return a list of files in this cookbook
     #
     # @returns [Array] of file names relative to
     # the files directory in the cookbook
     def cookbook_file_names(cookbook_name)
       relative_file_names = []
-      ckbk = run_context.cookbook_collection[cookbook_name]
-      cb_files = ckbk.file_filenames || []
+      cb_files = cookbook_file_paths(cookbook_name)
 
       # Drop the cookbook directory and cookbook name
       # from the front of the path. Account for the fact
       # that we might have multiple directories in the
       # cookbook path so it might be a string, or an Array
-
       cb_files.each do |cb_file|
         # Without the .dup the gsub! below causes  Chef::Exceptions::FileNotFound
         # when the cookbook_file resource goes to place the file
         relative_file_name = cb_file.dup
         Array(Chef::Config[:cookbook_path]).each do |cb_path|
+          # Ensure the full cookbook path is not part of relative name
           dir_prefix = Regexp.new('[A-Za-z]?:?' +
-            ::File.join(cb_path, cookbook_name, 'files', 'default', '/'))
+            ::File.join(cb_path, cookbook_name, '/'))
           relative_file_name.gsub!(dir_prefix, '')
+
+          files_prefix = ::File.join('files', 'default', '/')
+          relative_file_name.gsub!(files_prefix, '')
         end
         relative_file_names << relative_file_name
       end
