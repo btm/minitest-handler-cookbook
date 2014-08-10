@@ -1,6 +1,11 @@
 Changelog
 =====
 
+### 1.3.4 (UNRELEASED)
+* Add Chefspec tests for default recipe
+* [#67](https://github.com/btm/minitest-handler-cookbook/issues/67) -
+  Perform more exact matching on which test files should be run
+
 ### 1.3.2 (Jul 20, 2014)
 * [#64](https://github.com/btm/minitest-handler-cookbook/issues/62) -
   Fixed bug where test files were not dected properly detected under `chef-client`
