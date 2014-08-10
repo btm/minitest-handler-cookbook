@@ -13,4 +13,5 @@ group :integration do
   gem 'kitchen-digitalocean'
   gem 'kitchen-docker'
   gem 'busser-bats'
+  gem 'minitest-chef-handler'
 end
