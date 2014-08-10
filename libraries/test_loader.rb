@@ -185,7 +185,9 @@ module MinitestHandler
       files = []
       all_test_files(cookbook_name).each do |test_file|
         next if test_file.nil?
-        files << test_file if test_file.end_with?("#{recipe_name}_test.rb")
+        # See Github Issue #67 for more background on this
+        test_file_name = ::File.split(test_file).last
+        files << test_file if test_file_name == "#{recipe_name}_test.rb"
       end
       remove_nil_from_array(files)
     end
