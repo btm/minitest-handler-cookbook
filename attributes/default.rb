@@ -5,7 +5,7 @@ default[:minitest][:gem_version] = '3.0.1'
 default[:minitest][:chef_handler_gem_version] = '1.0.3'
 
 # The version of the ci_reporter gem to install
-default[:minitest][:ci_reporter_gem_version] = '1.9.2'
+default[:minitest][:ci_reporter_gem_version] = '1.9.3'
 
 default[:minitest][:tests] = '**/*_test.rb'
 default[:minitest][:recipes] = []
