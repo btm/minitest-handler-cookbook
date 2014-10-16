@@ -72,7 +72,7 @@ module MinitestHandler
     #
     # @returns [Boolean]
     def matches_filter?(recipe_name, cookbook_name)
-      full_name = "#{cookbook_name}::#{recipe_name}"
+      full_name = "recipe::#{cookbook_name}::#{recipe_name}"
       # If no filter is set, it will match all
       filter = node[:minitest][:filter] || '/./'
       if filter.class == String
