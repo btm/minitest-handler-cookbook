@@ -25,17 +25,21 @@ module MinitestHandler
           next
         end
 
-        # create the parent directory
-        dir = Chef::Resource::Directory.new(
-          "#{node[:minitest][:path]}/#{cookbook_name}", run_context)
-        dir.recursive(true)
-        dir.run_action(:create)
+        test_rb_files = test_files(cookbook_name, recipe_name)
 
-        support_files(cookbook_name).each do |support_file|
-          copy_file(cookbook_name, support_file)
-        end
-        test_files(cookbook_name, recipe_name).each do |test_file|
-          copy_file(cookbook_name, test_file)
+        unless test_rb_files.empty?
+          # create the parent directory
+          dir = Chef::Resource::Directory.new(
+            "#{node[:minitest][:path]}/#{cookbook_name}", run_context)
+          dir.recursive(true)
+          dir.run_action(:create)
+
+          support_files(cookbook_name).each do |support_file|
+            copy_file(cookbook_name, support_file)
+          end
+          test_files(cookbook_name, recipe_name).each do |test_file|
+            copy_file(cookbook_name, test_file)
+          end
         end
       end
 
