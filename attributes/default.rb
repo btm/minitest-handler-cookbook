@@ -9,6 +9,7 @@ default[:minitest][:ci_reporter_gem_version] = '1.9.3'
 
 default[:minitest][:tests] = '**/*_test.rb'
 default[:minitest][:recipes] = []
+default[:minitest][:ignore_recipes] = []
 default[:minitest][:verbose] = true
 
 case node[:os]
