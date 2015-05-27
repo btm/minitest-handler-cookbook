@@ -3,8 +3,7 @@ default[:minitest][:gem_version] = '3.0.1'
 
 # The version of the minitest-chef-handler gem to install
 default[:minitest][:chef_handler_gem_version] = '1.0.4'
-default[:minitest][:chef_handler_gem_source] = \
-  'http://artrepo.daptiv.com:8081/artifactory/rubygems-local/gems'
+default[:minitest][:chef_handler_gem_source] = nil
 
 # The version of the ci_reporter gem to install
 default[:minitest][:ci_reporter_gem_version] = '1.9.3'
