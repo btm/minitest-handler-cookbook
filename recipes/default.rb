@@ -12,22 +12,9 @@ chef_gem 'minitest' do
   only_if { Chef::VERSION.to_f < 10.10 }
 end.run_action(:install)
 
-if node[:minitest][:chef_handler_gem_source]
-  remote_str = "#{Chef::Config[:file_cache_path]}/minitest-chef-handler-"
-  remote_str << "#{node[:minitest][:chef_handler_gem_version]}.gem"
-
-  remote_src = "#{node[:minitest][:chef_handler_gem_source]}/"
-  remote_src << "minitest-chef-handler-#{node[:minitest][:chef_handler_gem_version]}.gem"
-
-  remote_file remote_str do
-    source remote_src
-  end.run_action(:create)
-end
-
 chef_gem 'minitest-chef-handler' do
   version node[:minitest][:chef_handler_gem_version]
   action :nothing
-  source remote_str if remote_str
   # I won't pretend I understand WHY this works, but since the release of
   # Chef 11.8, this was causing errors related to the PUMA Gem
   # http://lists.opscode.com/sympa/arc/chef/2013-10/msg00592.html
@@ -35,6 +22,9 @@ chef_gem 'minitest-chef-handler' do
   # but for whatever reason, simply retrying once works. The initial
   # attempt still fails with the error in that thread, however
   # the retry succeeds...
+  if node[:minitest][:chef_handler_gem_source]
+    options "--source #{node[:minitest][:chef_handler_gem_source]}"
+  end
   retries 1
 end.run_action(:install)
 
