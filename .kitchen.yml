@@ -35,7 +35,7 @@ platforms:
   <% end %>
 
 
-- name: centos-6.4
+- name: centos-6
   driver_config:
   <% if driver == 'vagrant' %>
     box: opscode-centos-6.4
@@ -43,7 +43,7 @@ platforms:
   <% elsif driver == 'digitalocean' %>
     image_id: 562354
   <% elsif driver == 'docker' %>
-    image: centos:6.4
+    image: centos:6.6
   <% end %>
 
 suites:
