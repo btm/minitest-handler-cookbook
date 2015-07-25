@@ -22,6 +22,9 @@ chef_gem 'minitest-chef-handler' do
   # but for whatever reason, simply retrying once works. The initial
   # attempt still fails with the error in that thread, however
   # the retry succeeds...
+  if node[:minitest][:chef_handler_gem_source]
+    options "--source #{node[:minitest][:chef_handler_gem_source]}"
+  end
   retries 1
 end.run_action(:install)
 

@@ -35,6 +35,8 @@ If you have any helper libraries, they should match `files/default/test/*helper*
 * `node[:minitest][:chef_handler_gem_version]` - The version of the [minitest-chef-handler](http://rubygems.org/gems/minitest-chef-handler)
   gem to install and use.
   * Default: 1.0.3
+* `node[:minitest][:chef_handler_gem_source]` - Alternate remote source for the minitest-chef-handler gem if not using RubyGems.org.(Ex http://mysource.com/gems')
+  * Default: RubyGems.org
 * `node[:minitest][:ci_reporter_gem_version]` - The version of the [ci_reporter](http://rubygems.org/gems/ci_reporter)
   gem to install and use.
   * Default: 1.9.2
