@@ -1,7 +1,17 @@
-language: ruby
-cache: bundler
+# Use Travis's cointainer based infrastructure
 sudo: false
-rvm:
-  - 1.9.3
+cache: bundler
+addons:
+  apt:
+    sources:
+      - chef-stable-precise
+    packages:
+      - chefdk
+
+# Ensure we make ChefDK's Ruby the default
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - chef exec bundle install
 script:
-  - bundle exec rake test
+  - chef --version
+  - chec exec bundle exec rake test
