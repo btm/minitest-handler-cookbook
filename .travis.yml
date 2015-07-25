@@ -1,4 +1,7 @@
 # Use Travis's cointainer based infrastructure
+language: ruby
+rvm:
+- 2.1.1
 sudo: false
 cache: bundler
 addons:
