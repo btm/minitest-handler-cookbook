@@ -1,13 +1,16 @@
 Changelog
 =====
 
-### 1.3.4 (UNRELEASED)
+### 1.4.0 (Jul 25, 2015)
 * Add Chefspec tests for default recipe
 * [#67](https://github.com/btm/minitest-handler-cookbook/issues/67) -
   Perform more exact matching on which test files should be run
-* [#73](https://github.com/btm/minitest-handler-cookbook/pull/73)
-  [josegonzalez](https://github.com/josegonzalez) -
+* [#73](https://github.com/btm/minitest-handler-cookbook/pull/73) @josegonzalez -
   Support for an alternative approach to ignoring recipes
+* [#75](https://github.com/btm/minitest-handler-cookbook/pull/75) @heathsnow -
+  Added ability to specify a source for minitest-chef-handler gem.
+* [#76](https://github.com/btm/minitest-handler-cookbook/pull/76) @b-dean -
+  Bump the version of the minitest-chef-handler gem to `v1.1.0`
 
 ### 1.3.2 (Jul 20, 2014)
 * [#64](https://github.com/btm/minitest-handler-cookbook/issues/62) -
