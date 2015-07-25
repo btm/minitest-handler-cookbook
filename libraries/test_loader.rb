@@ -26,9 +26,9 @@ module MinitestHandler
         end
 
         if matches_ignore?(recipe_name, cookbook_name)
-           ::Chef::Log.info('Not copying test files for recipe' \
-            " #{recipe_name} in cookbook #{cookbook_name} as it" \
-            " is not contained in #{node[:minitest][:ignore_recipes]}")
+          ::Chef::Log.info('Not copying test files for recipe' \
+          " #{recipe_name} in cookbook #{cookbook_name} as it" \
+          " is not contained in #{node[:minitest][:ignore_recipes]}")
           next
         end
 
@@ -108,7 +108,7 @@ module MinitestHandler
     # @returns [Boolean]
     def matches_ignore?(recipe_name, cookbook_name)
       full_name = "#{cookbook_name}::#{recipe_name}"
-      return node[:minitest][:ignore_recipes].include? full_name
+      node[:minitest][:ignore_recipes].include? full_name
     end
 
     # Collect a list of recipes that we care about

@@ -5,6 +5,9 @@ Changelog
 * Add Chefspec tests for default recipe
 * [#67](https://github.com/btm/minitest-handler-cookbook/issues/67) -
   Perform more exact matching on which test files should be run
+* [#73](https://github.com/btm/minitest-handler-cookbook/pull/73)
+  [josegonzalez](https://github.com/josegonzalez) -
+  Support for an alternative approach to ignoring recipes
 
 ### 1.3.2 (Jul 20, 2014)
 * [#64](https://github.com/btm/minitest-handler-cookbook/issues/62) -
