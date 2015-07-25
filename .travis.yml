@@ -17,4 +17,4 @@ before_script:
   - chef exec bundle install
 script:
   - chef --version
-  - chec exec bundle exec rake test
+  - chef exec bundle exec rake test
