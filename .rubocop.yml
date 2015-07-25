@@ -3,6 +3,6 @@ Encoding:
 LineLength:
   Max: 100
 MethodLength:
-  Max: 40
+  Max: 50
 HashSyntax:
   Enabled: false
