@@ -3,6 +3,7 @@
 chef_gem 'ci_reporter' do
   version node[:minitest][:ci_reporter_gem_version]
   action :nothing
+  compile_time false if Chef::Resource::ChefGem.method_defined?(:compile_time)
 end.run_action(:install)
 
 # Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
@@ -10,10 +11,15 @@ chef_gem 'minitest' do
   version node[:minitest][:gem_version]
   action :nothing
   only_if { Chef::VERSION.to_f < 10.10 }
+  compile_time false if Chef::Resource::ChefGem.method_defined?(:compile_time)
 end.run_action(:install)
 
 chef_gem 'minitest-chef-handler' do
   version node[:minitest][:chef_handler_gem_version]
+  if node[:minitest][:chef_handler_gem_source]
+    options "--source #{node[:minitest][:chef_handler_gem_source]}"
+  end
+  compile_time false if Chef::Resource::ChefGem.method_defined?(:compile_time)
   action :nothing
   # I won't pretend I understand WHY this works, but since the release of
   # Chef 11.8, this was causing errors related to the PUMA Gem
@@ -22,9 +28,6 @@ chef_gem 'minitest-chef-handler' do
   # but for whatever reason, simply retrying once works. The initial
   # attempt still fails with the error in that thread, however
   # the retry succeeds...
-  if node[:minitest][:chef_handler_gem_source]
-    options "--source #{node[:minitest][:chef_handler_gem_source]}"
-  end
   retries 1
 end.run_action(:install)
 
