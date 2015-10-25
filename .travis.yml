@@ -17,4 +17,5 @@ before_script:
   - chef exec bundle install
 script:
   - chef --version
+  - chef exec berks install
   - chef exec bundle exec rake test
