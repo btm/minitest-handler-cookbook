@@ -255,9 +255,12 @@ module MinitestHandler
         # when the cookbook_file resource goes to place the file
         relative_file_name = cb_file.dup
         Array(Chef::Config[:cookbook_path]).each do |cb_path|
+          this_cb_path = ::File.absolute_path(
+          # Ensure we have the trailing slash
+            ::File.join(cb_path, cookbook_name, '/')
+          )
           # Ensure the full cookbook path is not part of relative name
-          dir_prefix = Regexp.new('[A-Za-z]?:?' +
-            ::File.join(cb_path, cookbook_name, '/'))
+          dir_prefix = %r{[A-Za-z]?:?#{this_cb_path}}
           relative_file_name.gsub!(dir_prefix, '')
 
           files_prefix = ::File.join('files', 'default', '/')

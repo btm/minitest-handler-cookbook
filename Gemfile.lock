@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.2)
     activesupport (4.0.13)
       i18n (~> 0.6, >= 0.6.9)
       minitest (~> 4.2)
@@ -113,6 +114,7 @@ GEM
       virtus (~> 1.0.3)
     equalizer (0.0.11)
     erubis (2.7.0)
+    excon (0.45.4)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     fauxhai (2.3.0)
@@ -121,6 +123,117 @@ GEM
     ffi (1.9.10)
     ffi-yajl (2.2.2)
       libyajl2 (~> 1.2)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
+    fog (1.35.0)
+      fog-aliyun
+      fog-atmos
+      fog-aws (>= 0.6.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.32)
+      fog-dynect (~> 0.0.2)
+      fog-ecloud (~> 0.1)
+      fog-google (>= 0.1.1)
+      fog-json
+      fog-local
+      fog-powerdns (>= 0.1.1)
+      fog-profitbricks
+      fog-radosgw (>= 0.0.2)
+      fog-riakcs
+      fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
+      fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xenserver
+      fog-xml (~> 0.1.1)
+      ipaddress (~> 0.5)
+      nokogiri
+    fog-aliyun (0.0.10)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      ipaddress (~> 0.8)
+      xml-simple (~> 1.1)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.7.6)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.9.0)
+      fog-core (~> 1.22)
+      fog-json
+      inflecto (~> 0.0.2)
+    fog-core (1.32.1)
+      builder
+      excon (~> 0.45)
+      formatador (~> 0.2)
+      mime-types
+      net-scp (~> 1.1)
+      net-ssh (>= 2.1.3)
+    fog-dynect (0.0.2)
+      fog-core
+      fog-json
+      fog-xml
+    fog-ecloud (0.3.0)
+      fog-core
+      fog-xml
+    fog-google (0.1.1)
+      fog-core
+      fog-json
+      fog-xml
+    fog-json (1.0.2)
+      fog-core (~> 1.0)
+      multi_json (~> 1.10)
+    fog-local (0.2.1)
+      fog-core (~> 1.27)
+    fog-powerdns (0.1.1)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+    fog-profitbricks (0.0.5)
+      fog-core
+      fog-xml
+      nokogiri
+    fog-radosgw (0.0.4)
+      fog-core (>= 1.21.0)
+      fog-json
+      fog-xml (>= 0.0.1)
+    fog-riakcs (0.1.0)
+      fog-core
+      fog-json
+      fog-xml
+    fog-sakuracloud (1.3.3)
+      fog-core
+      fog-json
+    fog-serverlove (0.1.2)
+      fog-core
+      fog-json
+    fog-softlayer (1.0.0)
+      fog-core
+      fog-json
+    fog-storm_on_demand (0.1.1)
+      fog-core
+      fog-json
+    fog-terremark (0.1.0)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.1.0)
+      fission
+      fog-core
+    fog-voxel (0.1.0)
+      fog-core
+      fog-xml
+    fog-xenserver (0.2.2)
+      fog-core
+      fog-xml
+    fog-xml (0.1.2)
+      fog-core
+      nokogiri (~> 1.5, >= 1.5.11)
     foodcritic (5.0.0)
       erubis
       gherkin (~> 2.11)
@@ -129,14 +242,20 @@ GEM
       rufus-lru (~> 1.0)
       treetop (~> 1.4)
       yajl-ruby (~> 1.1)
+    formatador (0.2.5)
     gherkin (2.12.2)
       multi_json (~> 1.3)
+    gssapi (1.2.0)
+      ffi (>= 1.0.1)
+    gyoku (1.3.1)
+      builder (>= 2.1.2)
     hashie (3.4.2)
     highline (1.7.8)
     hitimes (1.2.3)
     httpclient (2.6.0.1)
     i18n (0.7.0)
     ice_nine (0.11.1)
+    inflecto (0.0.2)
     ipaddress (0.8.0)
     json (1.8.3)
     kartograph (0.2.3)
@@ -145,9 +264,18 @@ GEM
       test-kitchen (~> 1.2)
     kitchen-docker (2.3.0)
       test-kitchen (>= 1.0.0)
+    kitchen-openstack (2.1.0)
+      fog (~> 1.33)
+      ohai
+      test-kitchen (~> 1.4, >= 1.4.1)
+      unf
     kitchen-vagrant (0.19.0)
       test-kitchen (~> 1.4)
     libyajl2 (1.2.0)
+    little-plugger (1.1.4)
+    logging (1.8.2)
+      little-plugger (>= 1.1.3)
+      multi_json (>= 1.8.4)
     logify (0.2.0)
     method_source (0.8.2)
     mime-types (2.6.2)
@@ -178,6 +306,7 @@ GEM
     nio4r (1.1.1)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
+    nori (2.6.0)
     octokit (3.8.0)
       sawyer (~> 0.6.0, >= 0.5.3)
     ohai (8.7.0)
@@ -251,6 +380,8 @@ GEM
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.5)
+    rubyntlm (0.4.0)
+    rubyzip (1.1.7)
     rufus-lru (1.0.5)
     safe_yaml (1.0.4)
     sawyer (0.6.0)
@@ -290,6 +421,9 @@ GEM
     treetop (1.6.3)
       polyglot (~> 0.3)
     tzinfo (0.3.45)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     uuidtools (2.1.5)
     varia_model (0.4.1)
       buff-extensions (~> 1.0)
@@ -299,7 +433,20 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0, >= 0.0.3)
       equalizer (~> 0.0, >= 0.0.9)
+    winrm (1.3.4)
+      builder (>= 2.1.2)
+      gssapi (~> 1.2)
+      gyoku (~> 1.0)
+      httpclient (~> 2.2, >= 2.2.0.2)
+      logging (~> 1.6, >= 1.6.1)
+      nori (~> 2.0)
+      rubyntlm (~> 0.4.0)
+      uuidtools (~> 2.1.2)
+    winrm-transport (1.0.2)
+      rubyzip (~> 1.1, >= 1.1.7)
+      winrm (~> 1.3)
     wmi-lite (1.0.0)
+    xml-simple (1.1.5)
     yajl-ruby (1.2.1)
 
 PLATFORMS
@@ -310,15 +457,17 @@ DEPENDENCIES
   busser-bats
   chefspec (~> 4.4.0)
   foodcritic (~> 5.0.0)
-  kitchen-digitalocean
-  kitchen-docker
-  kitchen-vagrant (~> 0.14)
+  kitchen-digitalocean (~> 0.9.3)
+  kitchen-docker (~> 2.3)
+  kitchen-openstack (~> 2.1)
+  kitchen-vagrant (~> 0.19.0)
   minitest (~> 4.7.0, >= 4.7.5)
   minitest-chef-handler (~> 1.0.0, >= 1.0.3)
   rake
   rubocop (= 0.34.2)
   stove
-  test-kitchen (~> 1.1)
+  test-kitchen (~> 1.4, >= 1.4.2)
+  winrm-transport (~> 1.0, >= 1.0.2)
 
 BUNDLED WITH
    1.10.7.depsolverfix.0
