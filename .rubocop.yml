@@ -8,7 +8,7 @@ HashSyntax:
   Enabled: false
 
 Metrics/ModuleLength:
-  Max: 169
+  Max: 175
 
 Metrics/AbcSize:
   Max: 41
