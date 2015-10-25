@@ -48,7 +48,6 @@ module MinitestHandler
         test_files(cookbook_name, recipe_name).each do |test_file|
           copy_file(cookbook_name, test_file)
         end
-
       end
 
       # Try to help the user out and let them know if they have
@@ -221,7 +220,7 @@ module MinitestHandler
       cookbook_file_names(cookbook_name).each do |file_name|
         # match test/ or tests/. Those are the two
         # supported locations
-        files << file_name if file_name =~ /^tests?\//
+        files << file_name if file_name =~ %r{^tests?/}
       end
       remove_nil_from_array(files)
     end
@@ -273,7 +272,7 @@ module MinitestHandler
     #
     # @return [Array]
     def remove_nil_from_array(list_to_clean)
-      list_to_clean.reject { |entry| entry.nil? }
+      list_to_clean.reject(&:nil?)
     end
   end
 end

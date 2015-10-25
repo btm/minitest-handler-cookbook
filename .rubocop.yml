@@ -6,3 +6,12 @@ MethodLength:
   Max: 50
 HashSyntax:
   Enabled: false
+
+Metrics/ModuleLength:
+  Max: 169
+
+Metrics/AbcSize:
+  Max: 41
+
+Metrics/PerceivedComplexity:
+  Max: 8

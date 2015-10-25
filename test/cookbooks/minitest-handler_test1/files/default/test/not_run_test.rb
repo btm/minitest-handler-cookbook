@@ -8,5 +8,4 @@ describe 'minitest-handler::not_run' do
   # For test examples, see: http://bit.ly/1sJO1oC
   it 'runs no tests' do
   end
-
 end
