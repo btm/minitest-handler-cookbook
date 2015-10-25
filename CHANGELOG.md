@@ -1,10 +1,12 @@
 Changelog
 =====
-### 1.5.0 UNRELEASED
+### 1.5.0 (Oct 25, 2015)
 * Upgrade ChefSpec from `4.0.0` to `4.4.0`
 * Upgrade foodcritic from `4.0.0` to `5.0.0`
 * Upgrade rubucop from `0.24.1` to `0.34.2`
 * Address Chef 12 `compile_time` deprecations around `chef_gem` resources
+* [#77](https://github.com/btm/minitest-handler-cookbook/issues/77) -
+  Fix issue when running on Windows under Test Kitchen
 
 ### 1.4.0 (Jul 25, 2015)
 * Add Chefspec tests for default recipe
