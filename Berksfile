@@ -1,4 +1,4 @@
-source 'https://supermarket.getchef.com'
+source 'https://supermarket.chef.io'
 metadata
 
 cookbook 'minitest-handler_test1', path: 'test/cookbooks/minitest-handler_test1'
