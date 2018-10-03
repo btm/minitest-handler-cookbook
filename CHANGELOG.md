@@ -1,5 +1,8 @@
 Changelog
 =====
+### 1.5.1 (Oct 3, 2018)
+* [#79](https://github.com/btm/minitest-handler-cookbook/pull/79) Fix Chef 13 support
+
 ### 1.5.0 (Oct 25, 2015)
 * Upgrade ChefSpec from `4.0.0` to `4.4.0`
 * Upgrade foodcritic from `4.0.0` to `5.0.0`
