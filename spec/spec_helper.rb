@@ -8,6 +8,10 @@ RSpec.configure do |config|
   config.mock_with :rspec do |c|
     c.syntax = [:should, :expect]
   end
+
+  # Specify platform and version for ChefSpec
+  config.platform = 'ubuntu'
+  config.version = '12.04'
 end
 
 at_exit { ChefSpec::Coverage.report! }

@@ -9,8 +9,8 @@ DEPENDENCIES
     path: test/cookbooks/minitest-handler_test2
 
 GRAPH
-  chef_handler (1.1.6)
-  minitest-handler (1.5.0)
+  chef_handler (2.1.1)
+  minitest-handler (1.5.1)
     chef_handler (>= 0.0.0)
   minitest-handler_test1 (0.0.1)
     chef_handler (>= 0.0.0)

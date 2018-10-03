@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'berkshelf', '~> 3.3'
-gem 'chefspec', '~> 4.4.0'
+gem 'berkshelf', '~> 5.6'
+gem 'chefspec', '~> 6.2'
 gem 'rubocop', '= 0.34.2'
-gem 'foodcritic', '~> 5.0.0'
+gem 'foodcritic', '~> 10.3'
 gem 'stove'
 
 group :kitchen do
