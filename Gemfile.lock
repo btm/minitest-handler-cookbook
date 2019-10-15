@@ -129,7 +129,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     fauxhai (4.1.0)
       net-ssh
-    ffi (1.9.18)
+    ffi (1.11.1)
     ffi-yajl (2.3.0)
       libyajl2 (~> 1.2)
     fission (0.5.0)
