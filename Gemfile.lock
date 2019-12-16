@@ -124,7 +124,7 @@ GEM
       virtus (~> 1.0.3)
     equalizer (0.0.11)
     erubis (2.7.0)
-    excon (0.55.0)
+    excon (0.71.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     fauxhai (4.1.0)
