@@ -21,14 +21,14 @@ module MinitestHandler
         unless matches_filter?(recipe_name, cookbook_name)
           ::Chef::Log.debug('Not copying test files for recipe' \
             " #{recipe_name} in cookbook #{cookbook_name} as it" \
-            " does not match filter #{node[:minitest][:filter]}")
+            " does not match filter #{node['minitest']['filter']}")
           next
         end
 
         if matches_ignore?(recipe_name, cookbook_name)
           ::Chef::Log.info('Not copying test files for recipe' \
           " #{recipe_name} in cookbook #{cookbook_name} as it" \
-          " is not contained in #{node[:minitest][:ignore_recipes]}")
+          " is not contained in #{node['minitest']['ignore_recipes']}")
           next
         end
 
@@ -38,7 +38,7 @@ module MinitestHandler
 
         # create the parent directory
         dir = Chef::Resource::Directory.new(
-          "#{node[:minitest][:path]}/#{cookbook_name}", run_context)
+          "#{node['minitest']['path']}/#{cookbook_name}", run_context)
         dir.recursive(true)
         dir.run_action(:create)
 
@@ -59,13 +59,13 @@ module MinitestHandler
 
     def register_handler
       options = {
-        path: "#{node[:minitest][:path]}/#{node[:minitest][:tests]}",
-        verbose: node[:minitest][:verbose] }
+        path: "#{node['minitest']['path']}/#{node['minitest']['tests']}",
+        verbose: node['minitest']['verbose'] }
       # The following options can be omited
 
-      options[:filter] = node[:minitest][:filter] if node[:minitest].include? 'filter'
-      options[:seed] = node[:minitest][:seed] if node[:minitest].include? 'seed'
-      options[:ci_reports] = node[:minitest][:ci_reports] if node[:minitest].include? 'ci_reports'
+      options[:filter] = node['minitest']['filter'] if node['minitest'].include? 'filter'
+      options[:seed] = node['minitest']['seed'] if node['minitest'].include? 'seed'
+      options[:ci_reports] = node['minitest']['ci_reports'] if node['minitest'].include? 'ci_reports'
 
       handler = MiniTest::Chef::Handler.new(options)
 
@@ -85,17 +85,17 @@ module MinitestHandler
     def matches_filter?(recipe_name, cookbook_name)
       full_name = "recipe::#{cookbook_name}::#{recipe_name}"
       # If no filter is set, it will match all
-      filter = node[:minitest][:filter] || '/./'
+      filter = node['minitest']['filter'] || '/./'
       if filter.class == String
         # We don't know what form the user might give
         # us the pattern in. They may including leading and
         # trailing slashes, or they might just give us a
         # string. Try to handle both variations
-        if filter =~ %r{/(.*)/}
-          filter = Regexp.new(Regexp.last_match[1])
-        else
-          filter = Regexp.new(filter)
-        end
+        filter = if filter =~ %r{/(.*)/}
+                   Regexp.new(Regexp.last_match[1])
+                 else
+                   Regexp.new(filter)
+                 end
       end
       return true if full_name =~ filter
       false
@@ -107,7 +107,7 @@ module MinitestHandler
     # @returns [Boolean]
     def matches_ignore?(recipe_name, cookbook_name)
       full_name = "#{cookbook_name}::#{recipe_name}"
-      node[:minitest][:ignore_recipes].include? full_name
+      node['minitest']['ignore_recipes'].include? full_name
     end
 
     # Collect a list of recipes that we care about
@@ -115,10 +115,10 @@ module MinitestHandler
     # @return [Array] of recipes that should be tested
     def seen_recipes
       recipe_list = []
-      if node[:minitest][:recipes].empty?
+      if node['minitest']['recipes'].empty?
         if Chef::VERSION < '11.0'
           seen_recipes = node.run_state[:seen_recipes]
-          recipe_list = seen_recipes.keys.each { |i| i }
+          recipe_list = seen_recipes.each_key { |i| i }
         else
           recipe_list = run_context.loaded_recipes
         end
@@ -127,7 +127,7 @@ module MinitestHandler
           recipe_list = node.run_list.map { |item| item.name if item.type == :recipe }
         end
       else
-        recipe_list = node[:minitest][:recipes].dup
+        recipe_list = node['minitest']['recipes'].dup
       end
       recipe_list
     end
@@ -137,7 +137,7 @@ module MinitestHandler
     #
     # @returns [Nil]
     def copy_file(cookbook_name, file_path)
-      base_path = ::File.join(node[:minitest][:path], cookbook_name)
+      base_path = ::File.join(node['minitest']['path'], cookbook_name)
       full_path = ::File.join(base_path, file_path)
 
       # Historically there has not been a one-to-one parity between

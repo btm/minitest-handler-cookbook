@@ -1,19 +1,22 @@
 # Use Travis's cointainer based infrastructure
 language: ruby
 rvm:
-- 2.1.1
+- 3.0.1
 sudo: false
 cache: bundler
 addons:
   apt:
     sources:
-      - chef-stable-precise
+      - chef-current-xenial
     packages:
-      - chefdk
+      - chef-workstation
 
-# Ensure we make ChefDK's Ruby the default
+env:
+  - CHEF_LICENSE=accept
+
+# Ensure we make Chef Workstation's Ruby the default
 before_script:
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+  - eval "$(chef shell-init bash)"
   - chef exec bundle install
 script:
   - chef --version
