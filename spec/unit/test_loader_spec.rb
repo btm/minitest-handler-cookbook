@@ -17,7 +17,7 @@ describe ::MinitestHandler::CookbookHelper do
           ::File.join(@base_files_path, 'tests', 'minitest', 'default_test.rb'),
           # Also test variations of relative paths starting at cookbook root
           ::File.join('files', 'default', 'tests', 'minitest', 'default_test.rb'),
-          ::File.join('files', 'default', 'test', 'default_test.rb')
+          ::File.join('files', 'default', 'test', 'default_test.rb'),
         ]
       )
       expect(dummy_class.new.send(:cookbook_file_names, 'cookbook_name')[0]).to eq(

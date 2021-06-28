@@ -1,3 +1,4 @@
+require 'thor'
 require 'chefspec'
 require 'chefspec/berkshelf'
 
@@ -11,7 +12,5 @@ RSpec.configure do |config|
 
   # Specify platform and version for ChefSpec
   config.platform = 'ubuntu'
-  config.version = '12.04'
+  config.version = '20.04'
 end
-
-at_exit { ChefSpec::Coverage.report! }

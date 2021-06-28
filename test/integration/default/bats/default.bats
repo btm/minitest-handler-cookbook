@@ -36,3 +36,7 @@
 @test "does not copy not_run_gh67 test" {
   [ ! -f "/var/chef/minitest/minitest-handler_test1/not_run_gh67_test.rb" ]
 }
+
+@test "it creates a file when running gh93 test" {
+  [ -f "/tmp/gh93.txt" ]
+}

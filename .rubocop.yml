@@ -1,10 +1,10 @@
-Encoding:
+Style/Encoding:
   Enabled: false
-LineLength:
+Layout/LineLength:
   Max: 100
-MethodLength:
+Metrics/MethodLength:
   Max: 50
-HashSyntax:
+Style/HashSyntax:
   Enabled: false
 
 Metrics/ModuleLength:
