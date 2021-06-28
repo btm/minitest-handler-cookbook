@@ -29,17 +29,6 @@ test files named "<recipe-name>_test.rb" rather than all test files in the path 
 If you have any helper libraries, they should match `files/default/test/*helper*.rb`
 
 ## Attributes
-* `node[:minitest][:gem_version]` - The version of the [minitest](http://rubygems.org/gems/minitest)
-  gem to install and use.
-  * Default: 3.0.1
-* `node[:minitest][:chef_handler_gem_version]` - The version of the [minitest-chef-handler](http://rubygems.org/gems/minitest-chef-handler)
-  gem to install and use.
-  * Default: 1.0.3
-* `node[:minitest][:chef_handler_gem_source]` - Alternate remote source for the minitest-chef-handler gem if not using RubyGems.org.(Ex http://mysource.com/gems')
-  * Default: RubyGems.org
-* `node[:minitest][:ci_reporter_gem_version]` - The version of the [ci_reporter](http://rubygems.org/gems/ci_reporter)
-  gem to install and use.
-  * Default: 1.9.2
 * `node[:minitest][:path]` - Location to store and find test files.
   * Default: `/var/chef/minitest`
 * `node[:minitest][:recipes]` - The names of all recipes included during the

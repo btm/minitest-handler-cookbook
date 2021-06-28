@@ -9,4 +9,6 @@ version '1.5.1'
 
 supports 'ubuntu'
 supports 'centos'
-chef_version '>= 10.0'
+chef_version '>= 14'
+
+gem 'minitest-chef-handler', '~> 1.1.0'

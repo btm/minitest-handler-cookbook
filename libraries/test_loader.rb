@@ -58,6 +58,8 @@ module MinitestHandler
     end
 
     def register_handler
+      require 'minitest-chef-handler'
+
       options = {
         path: "#{node['minitest']['path']}/#{node['minitest']['tests']}",
         verbose: node['minitest']['verbose'] }
@@ -116,12 +118,7 @@ module MinitestHandler
     def seen_recipes
       recipe_list = []
       if node['minitest']['recipes'].empty?
-        if Chef::VERSION < '11.0'
-          seen_recipes = node.run_state[:seen_recipes]
-          recipe_list = seen_recipes.each_key { |i| i }
-        else
-          recipe_list = run_context.loaded_recipes
-        end
+        recipe_list = run_context.loaded_recipes
         if recipe_list.empty? && Chef::Config[:solo]
           # If you have roles listed in your run list they are NOT expanded
           recipe_list = node.run_list.map { |item| item.name if item.type == :recipe }

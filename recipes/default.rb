@@ -1,40 +1,5 @@
 ::Chef::Resource::RubyBlock.send(:include, MinitestHandler::CookbookHelper)
 
-chef_gem 'ci_reporter' do
-  version node['minitest']['ci_reporter_gem_version']
-  action :install
-  compile_time true
-end
-
-# Hack to install Gem immediately pre Chef 0.10.10 (CHEF-2879)
-chef_gem 'minitest' do
-  version node['minitest']['gem_version']
-  action :install
-  only_if { Chef::VERSION.to_f < 10.10 }
-  compile_time true
-end
-
-chef_gem 'minitest-chef-handler' do
-  version node['minitest']['chef_handler_gem_version']
-  if node['minitest']['chef_handler_gem_source']
-    options "--source #{node['minitest']['chef_handler_gem_source']}"
-  end
-  compile_time true
-  action :install
-  # I won't pretend I understand WHY this works, but since the release of
-  # Chef 11.8, this was causing errors related to the PUMA Gem
-  # http://lists.opscode.com/sympa/arc/chef/2013-10/msg00592.html
-  # I tried using the conservative flag, as well as a few other hacks
-  # but for whatever reason, simply retrying once works. The initial
-  # attempt still fails with the error in that thread, however
-  # the retry succeeds...
-  retries 1
-end
-
-Gem.clear_paths
-# Ensure minitest gem is utilized
-require 'minitest-chef-handler'
-
 [:delete, :create].each do |action|
   directory "#{action} minitest test location" do
     path node['minitest']['path']

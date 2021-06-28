@@ -1,13 +1,3 @@
-# The version of the minitest gem to install
-default[:minitest][:gem_version] = '3.0.1'
-
-# The version of the minitest-chef-handler gem to install
-default[:minitest][:chef_handler_gem_version] = '1.1.0'
-default[:minitest][:chef_handler_gem_source] = nil
-
-# The version of the ci_reporter gem to install
-default[:minitest][:ci_reporter_gem_version] = '1.9.3'
-
 default[:minitest][:tests] = '**/*_test.rb'
 default[:minitest][:recipes] = []
 default[:minitest][:ignore_recipes] = []
