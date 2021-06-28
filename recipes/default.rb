@@ -53,3 +53,9 @@ ruby_block 'load_tests_and_register_handler' do
     register_handler
   end
 end
+
+Chef.event_handler do
+  on :converge_start do
+    MinitestHandler::RSpecHack.fix_describe
+  end
+end
