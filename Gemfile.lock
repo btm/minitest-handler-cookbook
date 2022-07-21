@@ -475,7 +475,7 @@ GEM
     treetop (1.6.8)
       polyglot (~> 0.3)
     trollop (2.1.2)
-    tzinfo (0.3.53)
+    tzinfo (0.3.61)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.3)
